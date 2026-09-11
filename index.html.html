@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d1117">
+<title>奥地利·德国 11 天</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#f2f2f5;--card:#fff;--text:#1c1c1e;--text2:#6b6b70;--line:#e5e5ea;--accent:#1d6fe8;--shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04)}
+html[data-theme="dark"]{--bg:#0d1117;--card:#161b22;--text:#e6edf3;--text2:#8b949e;--line:#21262d;--accent:#58a6ff;--shadow:0 1px 3px rgba(0,0,0,.4)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:15px;line-height:1.55;padding-bottom:40px;transition:background .3s,color .3s}
+header{padding:24px 20px 8px}
+header h1{margin:0 0 4px;font-size:22px;font-weight:700;letter-spacing:-.3px}
+header .sub{margin:0;font-size:13px;color:var(--text2)}
+.now-card{margin:16px 16px 0;background:var(--card);border-radius:18px;padding:20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.now-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#ff6b6b,#ffa94d,#51cf66,#339af0,#9775fa);background-size:200% 100%;animation:shimmer 8s linear infinite}
+@keyframes shimmer{0%{background-position:0 0}100%{background-position:200% 0}}
+.now-label{font-size:11px;font-weight:600;letter-spacing:1.5px;color:var(--text2);text-transform:uppercase;margin-bottom:8px}
+.now-event{font-size:19px;font-weight:700;margin-bottom:4px;line-height:1.3}
+.now-note{font-size:13px;color:var(--text2);margin-bottom:16px;min-height:20px}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cd-cell{background:var(--bg);border-radius:12px;padding:10px 4px;text-align:center}
+.cd-num{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.cd-unit{font-size:11px;color:var(--text2);margin-top:2px}
+.now-time{font-size:12px;color:var(--text2);margin-top:12px;text-align:center}
+.section{margin:28px 16px 0}
+.section h2{font-size:16px;font-weight:700;margin:0 0 12px;padding-left:2px}
+.map-wrap{background:var(--card);border-radius:18px;padding:16px 12px 10px;box-shadow:var(--shadow);overflow:hidden}
+.map-svg{width:100%;height:auto;display:block}
+.map-svg text,.mini-map text{fill:var(--text);paint-order:stroke;stroke:var(--card);stroke-width:3.5px;stroke-linejoin:round;font-family:inherit}
+.map-svg .city-dot,.mini-map .city-dot{fill:var(--card)}
+.map-svg a{cursor:pointer}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;padding:14px 4px 4px;font-size:11px;color:var(--text2)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
+.booking-group{margin-bottom:14px}
+.bg-title{font-size:13px;font-weight:600;color:var(--text2);margin:0 0 8px 4px}
+.booking{background:var(--card);border-radius:14px;padding:14px 16px;margin-bottom:8px;box-shadow:var(--shadow)}
+.b-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:8px}
+.b-code{font-size:15px;font-weight:700;color:var(--text);text-decoration:none;border-bottom:1px dashed var(--line)}
+a.b-code{color:var(--accent);border-bottom-color:var(--accent)}
+a.b-code:active{opacity:.7}
+.b-date{font-size:12px;color:var(--text2);font-variant-numeric:tabular-nums;flex-shrink:0}
+.b-route{font-size:14px;line-height:1.45;margin-bottom:4px}
+.b-note{font-size:12.5px;color:var(--text2);line-height:1.45}
+.b-addr{font-size:12px;color:var(--text2);margin-top:6px;line-height:1.5;white-space:pre-line}
+.b-tel{font-size:12px;color:var(--accent);margin-top:4px;text-decoration:none;display:inline-block;margin-right:12px}
+.b-map{font-size:12px;color:var(--accent);text-decoration:none;display:inline-block;margin-top:4px}
+.day{background:var(--card);border-radius:16px;margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden}
+.day-head{padding:14px 16px 14px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;position:relative}
+.day-head::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--day-color,#ccc)}
+.day-left{flex-shrink:0;width:64px}
+.day-num{font-size:11px;font-weight:700;color:var(--day-color,#999);letter-spacing:1px}
+.day-date{font-size:12px;color:var(--text2);margin-top:1px;font-variant-numeric:tabular-nums}
+.day-right{flex:1;min-width:0}
+.day-title{font-size:15px;font-weight:600;line-height:1.3}
+.day-meta{font-size:12px;color:var(--text2);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.day-chevron{width:18px;height:18px;flex-shrink:0;color:var(--text2);transition:transform .25s}
+.day.open .day-chevron{transform:rotate(180deg)}
+.day-body{display:none;padding:0 16px 18px 20px}
+.day.open .day-body{display:block}
+.day-map-top{margin:0 0 14px;padding:12px;background:var(--bg);border-radius:12px}
+.mini-map{width:100%;height:auto;display:block;max-height:180px}
+.nav-btn{display:block;width:100%;margin-top:10px;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:13.5px;font-weight:600;text-align:center;text-decoration:none;cursor:pointer;font-family:inherit}
+.tl{position:relative;padding-left:70px}
+.tl::before{content:'';position:absolute;left:60px;top:14px;bottom:14px;width:1.5px;background:var(--line)}
+.tl-item{position:relative;padding:9px 0}
+.tl-time{position:absolute;left:-70px;top:9px;width:48px;text-align:right;font-size:12px;font-weight:600;color:var(--text2);font-variant-numeric:tabular-nums}
+.tl-item::before{content:'';position:absolute;left:-14px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--day-color,#999)}
+.tl-title{font-size:14px;line-height:1.4}
+.tl-title a{color:var(--text);text-decoration:none;border-bottom:1px dashed var(--line);font-weight:500}
+.tl-title a:active{border-bottom-color:var(--accent);color:var(--accent)}
+.tl-note{font-size:12.5px;color:var(--text2);margin-top:2px;line-height:1.45}
+.tl-must{display:inline-block;font-size:10.5px;font-weight:600;background:#ff9500;color:#fff;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:1px}
+.shop-city{background:var(--card);border-radius:16px;padding:16px;margin-bottom:10px;box-shadow:var(--shadow)}
+.shop-city h3{font-size:14px;font-weight:700;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.shop-city h3::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--city-color,#999)}
+.shop-city .shop-count{font-size:11.5px;color:var(--text2);margin-bottom:10px}
+.shop-item{padding:10px 0;border-top:1px solid var(--line)}
+.shop-item:first-of-type{border-top:none}
+.shop-name{font-size:13.5px;font-weight:600;line-height:1.4}
+.shop-name a{color:inherit;text-decoration:none;border-bottom:1px dashed var(--line)}
+.shop-name a:active{color:var(--accent)}
+.shop-tag{display:inline-block;font-size:10.5px;background:var(--bg);color:var(--text2);padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:1px;font-weight:500}
+.shop-brands{font-size:12.5px;color:var(--text2);margin-top:3px;line-height:1.5}
+.shop-addr{font-size:11.5px;color:var(--text2);margin-top:3px;opacity:.8}
+.shop-addr a{color:inherit;text-decoration:none}
+.todo-list{background:var(--card);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.todo-cat{font-size:11px;font-weight:700;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin:14px 0 6px}
+.todo-cat:first-child{margin-top:0}
+.todo-list ul{margin:0;padding:0 0 0 18px;list-style:none}
+.todo-list li{position:relative;font-size:13.5px;line-height:1.55;padding:4px 0}
+.todo-list li::before{content:'';position:absolute;left:-14px;top:12px;width:5px;height:5px;border-radius:50%;background:var(--text2)}
+.tips-list{background:var(--card);border-radius:16px;padding:8px 18px;box-shadow:var(--shadow)}
+.tip{padding:12px 0;border-bottom:1px solid var(--line)}
+.tip:last-child{border-bottom:none}
+.tip-t{font-size:13.5px;font-weight:600;margin-bottom:3px}
+.tip-d{font-size:13px;color:var(--text2);line-height:1.55}
+footer{text-align:center;font-size:11.5px;color:var(--text2);margin:32px 16px 16px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>奥地利 · 德国 11 天</h1>
+  <p class="sub">2026.09.25 – 10.07 · 3 人自驾</p>
+</header>
+
+<section class="now-card">
+  <div class="now-label">此刻关注</div>
+  <div class="now-event" id="nowEvent">—</div>
+  <div class="now-note" id="nowNote"></div>
+  <div class="countdown">
+    <div class="cd-cell"><div class="cd-num" id="cdD">0</div><div class="cd-unit">天</div></div>
+    <div class="cd-cell"><div class="cd-num" id="cdH">00</div><div class="cd-unit">时</div></div>
+    <div class="cd-cell"><div class="cd-num" id="cdM">00</div><div class="cd-unit">分</div></div>
+    <div class="cd-cell"><div class="cd-num" id="cdS">00</div><div class="cd-unit">秒</div></div>
+  </div>
+  <div class="now-time" id="nowTime">—</div>
+</section>
+
+<section class="section">
+  <h2>行程总览</h2>
+  <div class="map-wrap">
+    <svg class="map-svg" viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg">
+      <!-- 慕尼黑机场 → 萨尔茨堡 -->
+      <path d="M433 307 Q 510 340 588 383" stroke="#ff6b6b" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
+      <!-- 萨尔茨堡 ⇄ 哈尔施塔特 -->
+      <path d="M588 383 Q 630 400 662 419" stroke="#ffa94d" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="7 5" opacity=".85"/>
+      <!-- 萨尔茨堡 → 哈莱因 → 因斯布鲁克（修复断档） -->
+      <path d="M588 383 Q 592 396 594 402 Q 500 448 385 460" stroke="#51cf66" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
+      <!-- 因斯布鲁克 → 新天鹅堡 → 菲森 -->
+      <path d="M385 460 Q 340 440 302 419" stroke="#339af0" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
+      <!-- 菲森 → 慕尼黑 -->
+      <path d="M299 418 Q 350 380 407 337" stroke="#9775fa" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
+      <!-- 慕尼黑 → 罗腾堡 → 纽伦堡 -->
+      <path d="M407 337 Q 320 240 235 161 Q 290 155 345 151" stroke="#f06595" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
+      <!-- 纽伦堡 → 班贝格 → 维尔茨堡 -->
+      <path d="M345 151 Q 332 118 322 88 Q 260 92 206 102" stroke="#20c997" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
+      <!-- 维尔茨堡 → 法兰克福机场 -->
+      <path d="M206 102 Q 130 80 50 57" stroke="#adb5bd" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
+
+      <!-- 城市点，可点击 -->
+      <a href="https://www.google.com/maps/search/?api=1&query=M%C3%BCnchen+Flughafen" target="_blank" rel="noopener">
+        <circle class="city-dot" cx="433" cy="307" r="6" stroke="#ff6b6b" stroke-width="3.5"/>
+        <text x="433" y="295" text-anchor="middle" font-size="13" font-weight="600">慕尼黑机场 ✈取车</text>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=The+Westin+Grand+Munich" target="_blank" rel="noopener">
+        <circle class="city-dot" cx="407" cy="337" r="6" stroke="#ff6b6b" stroke-width="3.5"/>
+        <text x="407" y="360" text-anchor="middle" font-size="13" font-weight="600">慕尼黑</text>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Sheraton+Grand+Salzburg" target="_blank" rel="noopener">
+        <circle class="city-dot" cx="588" cy="383" r="6" stroke="#ff6b6b" stroke-width="3.5"/>
+        <text x="588" y="405" text-anchor="middle" font-size="13" font-weight="600">萨尔茨堡</text>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Hallstatt" target="_blank" rel="noopener">
+        <circle class="city-dot" cx="662" cy="419" r="6" stroke="#ffa94d" stroke-width="3.5"/>
+        <text x="662" y="441" text-anchor="middle" font-size="13" font-weight="600">哈尔施塔特</text>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Innsbruck" target="_blank" rel="noopener">
+        <circle class="city-dot" cx="385" cy="460" r="6" stroke="#51cf66" stroke-width="3.5"/>
+        <text x="385" y="482" text-anchor="middle" font-size="13" font-weight="600">因斯布鲁克</text>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Sonne+F%C3%BCssen" target="_blank" rel="noopener">
+        <circle class="city-dot" cx="299" cy="418" r="6" stroke="#339af0" stroke-width="3.5"/>
+        <text x="285" y="423" text-anchor="end" font-size="13" font-weight="600">菲森</text>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Rothenburg+ob+der+Tauber" target="_blank" rel="noopener">
+        <circle class="city-dot" cx="235" cy="161" r="6" stroke="#f06595" stroke-width="3.5"/>
+        <text x="221" y="166" text-anchor="end" font-size="13" font-weight="600">罗滕堡</text>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Sheraton+Carlton+N%C3%BCrnberg" target="_blank" rel="noopener">
+        <circle class="city-dot" cx="345" cy="151" r="6" stroke="#f06595" stroke-width="3.5"/>
+        <text x="345" y="138" text-anchor="middle" font-size="13" font-weight="600">纽伦堡</text>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Neue+Residenz+Bamberg" target="_blank" rel="noopener">
+        <circle class="city-dot" cx="322" cy="88" r="6" stroke="#20c997" stroke-width="3.5"/>
+        <text x="322" y="75" text-anchor="middle" font-size="13" font-weight="600">班贝格</text>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Maritim+Hotel+W%C3%BCrzburg" target="_blank" rel="noopener">
+        <circle class="city-dot" cx="206" cy="102" r="6" stroke="#20c997" stroke-width="3.5"/>
+        <text x="192" y="107" text-anchor="end" font-size="13" font-weight="600">维尔茨堡</text>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Frankfurt+Airport+City+Mall" target="_blank" rel="noopener">
+        <circle class="city-dot" cx="50" cy="57" r="6" stroke="#adb5bd" stroke-width="3.5"/>
+        <text x="50" y="80" text-anchor="middle" font-size="13" font-weight="600">法兰克福 ✈还车</text>
+      </a>
+    </svg>
+    <div class="legend">
+      <span><i style="background:#ff6b6b"></i>9/26–27 萨尔茨堡</span>
+      <span><i style="background:#ffa94d"></i>9/27 哈尔施塔特</span>
+      <span><i style="background:#51cf66"></i>9/28 因斯布鲁克</span>
+      <span><i style="background:#339af0"></i>9/29 菲森</span>
+      <span><i style="background:#9775fa"></i>9/30 慕尼黑</span>
+      <span><i style="background:#f06595"></i>10/3 纽伦堡</span>
+      <span><i style="background:#20c997"></i>10/4–5 维尔茨堡</span>
+      <span><i style="background:#adb5bd"></i>10/6 法兰克福</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>已确认</h2>
+  <div id="bookings"></div>
+</section>
+
+<section class="section">
+  <h2>逐日行程</h2>
+  <div id="days"></div>
+</section>
+
+<section class="section">
+  <h2>购物点</h2>
+  <div id="shops"></div>
+</section>
+
+<section class="section">
+  <h2>待办清单</h2>
+  <div id="todo" class="todo-list"></div>
+</section>
+
+<section class="section">
+  <h2>实用贴士</h2>
+  <div id="tips" class="tips-list"></div>
+</section>
+
+<footer>所有时间均为当地时间（Europe/Berlin, UTC+2）<br>点击地点名可唤起 Google 地图导航</footer>
+
+<script>
+(function(){
+'use strict';
+
+function setTheme(){
+  var h = new Date().getHours();
+  document.documentElement.dataset.theme = (h >= 6 && h < 18) ? 'light' : 'dark';
+}
+setTheme(); setInterval(setTheme, 60000);
+
+var EVENTS = [
+  {ts:'2026-09-25T23:10:00+08:00', title:'LH727 上海起飞', note:'浦东 PVG → 慕尼黑 MUC · 经济舱'},
+  {ts:'2026-09-26T06:20:00+02:00', title:'抵达慕尼黑 MUC T2', note:'LH727 落地 · 出关取行李约 1 小时'},
+  {ts:'2026-09-26T07:30:00+02:00', title:'Europcar 取车', note:'慕尼黑机场 Airportcenter Ebene 3'},
+  {ts:'2026-09-26T08:30:00+02:00', title:'出发去萨尔茨堡', note:'150km / 1h45'},
+  {ts:'2026-09-26T11:00:00+02:00', title:'抵达萨尔茨堡喜来登', note:'寄存行李 · 老城午餐'},
+  {ts:'2026-09-27T07:30:00+02:00', title:'出发去哈尔施塔特', note:'单程 1h30 · 周日需早到'},
+  {ts:'2026-09-27T09:00:00+02:00', title:'哈尔施塔特小镇', note:'P1/P2 停车场 · 世界遗产湖畔小镇'},
+  {ts:'2026-09-28T09:00:00+02:00', title:'出发去哈莱因盐矿', note:'萨尔茨堡出发约 30 分钟'},
+  {ts:'2026-09-28T10:00:00+02:00', title:'萨尔茨堡盐矿', note:'矿车 · 滑梯 · 地下盐湖 · 中文导览'},
+  {ts:'2026-09-28T13:30:00+02:00', title:'出发去因斯布鲁克', note:'230km / 2h45'},
+  {ts:'2026-09-29T07:00:00+02:00', title:'出发去新天鹅堡', note:'115km / 1h45 · 09:00 场次'},
+  {ts:'2026-09-29T09:00:00+02:00', title:'新天鹅堡参观', note:'Tour 412 · 中文语音导览 · 3 人'},
+  {ts:'2026-09-30T10:00:00+02:00', title:'出发去慕尼黑', note:'130km / 1h45'},
+  {ts:'2026-10-01T13:00:00+02:00', title:'出发去 MUC T2', note:'KM309 17:10 起飞 · 建议 14:30 到机场'},
+  {ts:'2026-10-01T17:10:00+02:00', title:'KM309 慕尼黑起飞', note:'→ 马耳他 MLA · 2h20'},
+  {ts:'2026-10-02T17:55:00+02:00', title:'LH1925 马耳他起飞', note:'实际乘坐汉莎 · → 慕尼黑'},
+  {ts:'2026-10-02T20:20:00+02:00', title:'抵达慕尼黑 MUC T2', note:'出关约 21:30 · 回威斯汀约 22:00'},
+  {ts:'2026-10-03T08:30:00+02:00', title:'出发去罗腾堡', note:'国庆日 + 啤酒节最后周六 · 出城可能拥堵'},
+  {ts:'2026-10-04T10:00:00+02:00', title:'出发去班贝格', note:'纽伦堡 → 班贝格 · 约 1 小时'},
+  {ts:'2026-10-04T12:30:00+02:00', title:'班贝格新宫', note:'10:00–16:00 · 15:30 最后入场'},
+  {ts:'2026-10-05T10:00:00+02:00', title:'维尔茨堡主教宫', note:'9:00–18:00 · 3 人已预约'},
+  {ts:'2026-10-05T14:00:00+02:00', title:'Wertheim Village 奥特莱斯', note:'周一至周六 10:00–20:00'},
+  {ts:'2026-10-06T10:30:00+02:00', title:'出发去法兰克福机场', note:'120km / 1h20 · 还车后进航站楼'},
+  {ts:'2026-10-06T15:40:00+02:00', title:'LH728 法兰克福起飞', note:'→ 上海 PVG · 11h35'},
+  {ts:'2026-10-07T09:15:00+08:00', title:'抵达上海 PVG', note:'行程结束 · 欢迎回家'}
+];
+
+var CITY = {
+  '慕尼黑机场':[433,307], '萨尔茨堡喜来登':[588,383], '哈尔施塔特':[662,419],
+  '哈莱因盐矿':[594,402], '因斯布鲁克假日酒店':[385,460], '新天鹅堡':[305,419],
+  '菲森索内酒店':[299,418], '慕尼黑威斯汀':[407,337], '罗腾堡':[235,161],
+  '纽伦堡喜来登':[345,151], '班贝格新宫':[322,88], '维尔茨堡玛丽蒂姆':[206,102],
+  '维尔茨堡主教宫':[210,100], 'Wertheim Village':[178,110], '法兰克福机场':[50,57]
+};
+
+var BOOKINGS = [
+  {icon:'✈️', label:'机票', items:[
+    {code:'LH727', date:'9/25 周五', route:'上海 PVG 23:10 → 慕尼黑 MUC 06:20 +1', note:'经济舱 · 13h10'},
+    {code:'KM309', date:'10/1 周四', route:'慕尼黑 MUC T2 17:10 → 马耳他 MLA 19:30', note:'马耳他航空 · 2h20'},
+    {code:'LH1925', date:'10/2 周五', route:'马耳他 MLA 17:55 → 慕尼黑 MUC T2 20:20', note:'实际乘坐汉莎 · 2h25'},
+    {code:'LH728', date:'10/6 周二', route:'法兰克福 FRA 15:40 → 上海 PVG 09:15 +1', note:'经济舱 · 11h35'}
+  ]},
+  {icon:'🚗', label:'租车', items:[
+    {code:'Europcar 取车', date:'9/26 07:30', route:'慕尼黑机场 T1 · Airportcenter Ebene 3',
+     note:'Volvo V60 或同级 · 含跨境费 · 含额外驾驶员 · 含异地还车 · 无限里程 · 全险',
+     addr:'Terminalstr. Mitte, Airportcenter Ebene 3, 85356 München',
+     tel:'+49 89 9735020', pmap:'München Flughafen Airportcenter'},
+    {code:'Europcar 还车', date:'10/6 13:00', route:'法兰克福机场 · Airport City Mall',
+     addr:'Airport City Mall, 60549 Frankfurt am Main',
+     tel:'+49 69 697970', pmap:'Frankfurt Airport City Mall'}
+  ]},
+  {icon:'🏨', label:'酒店', items:[
+    {code:'萨尔茨堡喜来登', date:'9/26 – 9/28 · 2 晚', route:'2 间经典大床房 · 含早',
+     addr:'Auerspergstraße 4, 5020 Salzburg', tel:'+43-662-889990', pmap:'Sheraton Grand Salzburg'},
+    {code:'因斯布鲁克假日酒店', date:'9/28 – 9/29 · 1 晚', route:'三人房 · 含早',
+     addr:'Bernhard-Höfel-Straße 16, 6020 Innsbruck', tel:'+43-512344333', pmap:'Holiday Inn Innsbruck'},
+    {code:'菲森索内酒店', date:'9/29 – 9/30 · 1 晚', route:'中等四人房 · 含早',
+     addr:'Prinzregentenpl. 1, 87629 Füssen', tel:'+49-83629080', pmap:'Hotel Sonne Füssen'},
+    {code:'慕尼黑威斯汀', date:'9/30 – 10/3 · 3 晚', route:'精致套房 · 含早',
+     addr:'Arabellastraße 6, 81925 München', tel:'+49-89-92640', pmap:'The Westin Grand Munich'},
+    {code:'纽伦堡喜来登', date:'10/3 – 10/4 · 1 晚', route:'2 间高级庭院景双床房 · 含早',
+     addr:'Eilgutstraße 15, 90443 Nürnberg', tel:'+49-911-20030', pmap:'Sheraton Carlton Nürnberg'},
+    {code:'维尔茨堡玛丽蒂姆', date:'10/4 – 10/6 · 2 晚', route:'舒适家庭房 · 含早',
+     addr:'Pleichertorstraße 5, 97070 Würzburg', tel:'+49-931-3053830', pmap:'Maritim Hotel Würzburg'}
+  ]},
+  {icon:'🎫', label:'门票', items:[
+    {code:'新天鹅堡', date:'9/29 09:00', route:'3 人 · Tour 412 · 中文语音导览', note:'已预约', pmap:'Schloss Neuschwanstein'},
+    {code:'维尔茨堡主教宫', date:'10/5', route:'3 人 · 免费入场', note:'已预约 · 9:00–18:00 · 最后入场 17:15', pmap:'Residenz Würzburg'}
+  ]}
+];
+
+var DAYS = [
+  {n:1, date:'9/26', wd:'周六', title:'上海 → 慕尼黑 → 萨尔茨堡', stay:'萨尔茨堡喜来登', drive:'150km / 1h45', color:'#ff6b6b',
+   items:[
+     {t:'06:20', s:'抵达慕尼黑 MUC T2', d:'LH727 落地 · 出关取行李约 1 小时', p:'München Flughafen Terminal 2'},
+     {t:'07:30', s:'Europcar 取车', d:'机场 Airportcenter Ebene 3', p:'München Flughafen Airportcenter'},
+     {t:'08:30', s:'出发去萨尔茨堡', d:'150km / 1h45'},
+     {t:'11:00', s:'抵达萨尔茨堡喜来登', d:'寄存行李', p:'Sheraton Grand Salzburg'},
+     {t:'12:00', s:'午餐 · 老城', d:'推荐：传统奥地利菜'},
+     {t:'14:00', s:'粮食胡同（传统+大众品牌）', d:'Louis Vuitton · Swarovski · Tommy Hilfiger · Bally · 莫扎特巧克力', p:'Getreidegasse Salzburg'},
+     {t:'15:00', s:'科尔市场（顶奢集中地）', d:'Hermès · LV · Chanel · Gucci · Cartier · Tiffany · Burberry', p:'Alter Markt Salzburg'},
+     {t:'16:00', s:'ICON Salzburg（设计师买手店）', d:'Balenciaga · Alexander McQueen · Loewe · Tom Ford · Golden Goose', p:'ICON Salzburg'},
+     {t:'17:00', s:'米拉贝尔宫花园', d:'免费 · 《音乐之声》取景地', p:'Mirabellgarten Salzburg'},
+     {t:'19:00', s:'晚餐', d:'推荐：老城传统奥地利菜'}
+   ], route:['慕尼黑机场','萨尔茨堡喜来登']},
+
+  {n:2, date:'9/27', wd:'周日', title:'萨尔茨堡 ⇄ 哈尔施塔特', stay:'萨尔茨堡喜来登', drive:'往返 150km / 2h40', color:'#ffa94d',
+   items:[
+     {t:'07:30', s:'出发去哈尔施塔特', d:'必须早起 · 周日停车场 9 点后爆满', must:1},
+     {t:'09:00', s:'抵达 P1/P2 停车场', d:'', p:'Parkplatz Hallstatt P1'},
+     {t:'09:00', s:'哈尔施塔特小镇', d:'世界遗产 · 湖边 · 集市广场 · 明信片角度', p:'Hallstatt'},
+     {t:'12:30', s:'午餐', d:'湖边餐厅 · 推荐烤鳟鱼'},
+     {t:'14:00', s:'返程回萨尔茨堡', d:'约 1h30'},
+     {t:'16:00', s:'回到萨尔茨堡', d:''},
+     {t:'17:00', s:'萨尔茨堡要塞', d:'可坐缆车上要塞 · 俯瞰全城', p:'Festung Hohensalzburg'},
+     {t:'19:00', s:'晚餐', d:''}
+   ], route:['萨尔茨堡喜来登','哈尔施塔特','萨尔茨堡喜来登']},
+
+  {n:3, date:'9/28', wd:'周一', title:'萨尔茨堡 → 哈莱因盐矿 → 因斯布鲁克', stay:'因斯布鲁克假日酒店', drive:'230km / 2h45', color:'#51cf66',
+   items:[
+     {t:'09:00', s:'出发去哈莱因盐矿', d:'萨尔茨堡出发约 30 分钟'},
+     {t:'09:30', s:'抵达盐矿', d:'', p:'Salzwelten Salzburg'},
+     {t:'10:00', s:'萨尔茨堡盐矿', d:'矿车 · 滑梯 · 地下盐湖 · 中文导览 · 约 2.5 小时', p:'Salzwelten Salzburg'},
+     {t:'12:30', s:'午餐', d:'哈莱因镇上'},
+     {t:'13:30', s:'出发去因斯布鲁克', d:'230km / 2h45'},
+     {t:'16:30', s:'抵达因斯布鲁克假日酒店', d:'', p:'Holiday Inn Innsbruck'},
+     {t:'17:30', s:'玛丽亚·特蕾西亚大街', d:'豪华购物街 · 国际品牌旗舰店集中', p:'Maria-Theresien-Straße Innsbruck'},
+     {t:'18:00', s:'Einwaller（顶奢买手店）', d:'Prada · Valentino · Saint Laurent · Moncler · Alexander McQueen', p:'Einwaller Innsbruck'},
+     {t:'18:30', s:'黄金屋顶', d:'因斯布鲁克地标', p:'Goldenes Dachl Innsbruck'},
+     {t:'19:30', s:'晚餐', d:'推荐：蒂罗尔传统菜'}
+   ], route:['萨尔茨堡喜来登','哈莱因盐矿','因斯布鲁克假日酒店']},
+
+  {n:4, date:'9/29', wd:'周二', title:'因斯布鲁克 → 新天鹅堡 → 菲森', stay:'菲森索内酒店', drive:'115km / 1h45', color:'#339af0',
+   items:[
+     {t:'07:00', s:'出发去新天鹅堡', d:'必须早起 · 票是 09:00 场次', must:1},
+     {t:'09:00', s:'新天鹅堡参观', d:'Tour 412 · 中文语音导览 · 3 人', p:'Schloss Neuschwanstein'},
+     {t:'10:30', s:'玛丽恩桥', d:'视开放情况 · 拍全景最佳机位', p:'Marienbrücke Schwangau'},
+     {t:'12:00', s:'午餐 · 霍恩施瓦高', d:''},
+     {t:'13:30', s:'出发去菲森', d:'约 30 分钟'},
+     {t:'14:00', s:'抵达菲森索内酒店', d:'', p:'Hotel Sonne Füssen'},
+     {t:'15:30', s:'菲森老城', d:'中世纪小巷 · 彩色房子', p:'Füssen Altstadt'},
+     {t:'19:00', s:'晚餐', d:''}
+   ], route:['因斯布鲁克假日酒店','新天鹅堡','菲森索内酒店']},
+
+  {n:5, date:'9/30', wd:'周三', title:'菲森 → 慕尼黑', stay:'慕尼黑威斯汀', drive:'130km / 1h45', color:'#9775fa',
+   items:[
+     {t:'10:00', s:'出发去慕尼黑', d:'130km / 1h45'},
+     {t:'12:00', s:'抵达慕尼黑威斯汀', d:'停车入住', p:'The Westin Grand Munich'},
+     {t:'12:30', s:'午餐', d:''},
+     {t:'14:00', s:'玛丽恩广场 · 新市政厅', d:'整点看钟琴表演', p:'Marienplatz München'},
+     {t:'14:30', s:'马克西米利安大街（顶奢）', d:'Hermès · Chanel · LV · Gucci · Dior · Armani · Van Cleef', p:'Maximilianstraße München'},
+     {t:'15:30', s:'Oberpollinger（高端百货）', d:'Celine · Dior · Prada · Balmain · Rolex · Cartier', p:'Oberpollinger München'},
+     {t:'16:30', s:'维克图阿连市场', d:'德国食品 · 伴手礼', p:'Viktualienmarkt München'},
+     {t:'18:00', s:'回酒店休息', d:''},
+     {t:'19:30', s:'啤酒节', d:'特蕾西娅草坪 · 2026 年 9/19–10/4', p:'Theresienwiese München'}
+   ], route:['菲森索内酒店','慕尼黑威斯汀']},
+
+  {n:6, date:'10/1', wd:'周四', title:'慕尼黑 → 马耳他', stay:'马耳他', drive:'—', color:'#ff922b',
+   items:[
+     {t:'10:00', s:'慕尼黑市区', d:'宁芬堡宫外观或宝马世界', p:'Schloss Nymphenburg'},
+     {t:'12:00', s:'回酒店取行李', d:'', p:'The Westin Grand Munich'},
+     {t:'13:00', s:'出发去 MUC T2', d:'打车或 S-Bahn · 约 40 分钟'},
+     {t:'14:30', s:'抵达机场', d:'国际航班建议提前 2.5 小时', must:1, p:'München Flughafen Terminal 2'},
+     {t:'17:10', s:'KM309 起飞', d:'慕尼黑 → 马耳他 · 2h20'},
+     {t:'19:30', s:'落地马耳他 MLA', d:'', p:'Malta International Airport'}
+   ], route:['慕尼黑威斯汀','慕尼黑机场']},
+
+  {n:7, date:'10/2', wd:'周五', title:'马耳他 → 慕尼黑', stay:'慕尼黑威斯汀', drive:'—', color:'#ff922b',
+   items:[
+     {t:'17:55', s:'LH1925 马耳他起飞', d:'实际乘坐汉莎', p:'Malta International Airport'},
+     {t:'20:20', s:'落地慕尼黑 MUC T2', d:'', p:'München Flughafen Terminal 2'},
+     {t:'21:30', s:'出关取行李', d:''},
+     {t:'22:00', s:'回慕尼黑威斯汀', d:'', p:'The Westin Grand Munich'}
+   ], route:['慕尼黑机场','慕尼黑威斯汀']},
+
+  {n:8, date:'10/3', wd:'周六', title:'慕尼黑 → 罗腾堡 → 纽伦堡', stay:'纽伦堡喜来登', drive:'350km / 3h30', color:'#f06595',
+   items:[
+     {t:'08:30', s:'出发去罗腾堡', d:'国庆日 + 啤酒节最后周六 · 出城可能堵', must:1},
+     {t:'10:30', s:'抵达罗腾堡', d:'', p:'Rothenburg ob der Tauber'},
+     {t:'10:30', s:'老城 · 城墙 · 步云莱', d:'商店关门 · 户外景点全开', p:'Rothenburg ob der Tauber'},
+     {t:'11:30', s:'圣雅各布教堂', d:'藏有圣血祭坛', p:'St. Jakobskirche Rothenburg'},
+     {t:'12:30', s:'Käthe Wohlfahrt 圣诞商店', d:'胡桃夹子 · 德国传统圣诞装饰（国庆日可能关门）', p:'Käthe Wohlfahrt Rothenburg'},
+     {t:'13:00', s:'午餐', d:'餐厅营业 · 建议提前订位'},
+     {t:'13:30', s:'出发去纽伦堡', d:'约 1 小时'},
+     {t:'15:00', s:'抵达纽伦堡喜来登', d:'', p:'Sheraton Carlton Nürnberg'},
+     {t:'15:30', s:'主集市广场 · 美泉 · 圣塞巴尔德教堂', d:'', p:'Hauptmarkt Nürnberg'},
+     {t:'17:00', s:'纽伦堡城堡外观', d:'如时间够可进内部', p:'Kaiserburg Nürnberg'},
+     {t:'19:00', s:'晚餐', d:'推荐：纽伦堡香肠'}
+   ], route:['慕尼黑威斯汀','罗腾堡','纽伦堡喜来登']},
+
+  {n:9, date:'10/4', wd:'周日', title:'纽伦堡 → 班贝格 → 维尔茨堡', stay:'维尔茨堡玛丽蒂姆', drive:'165km / 2h', color:'#20c997',
+   items:[
+     {t:'10:00', s:'出发去班贝格', d:'睡饱再走'},
+     {t:'11:00', s:'抵达班贝格 · 午餐', d:'建议：烟熏啤酒 + 猪肘', p:'Bamberg Altstadt'},
+     {t:'12:30', s:'班贝格新宫', d:'10:00–16:00 · 15:30 最后入场', must:1, p:'Neue Residenz Bamberg'},
+     {t:'14:00', s:'玫瑰花园', d:'免费 · 俯瞰全城', p:'Rosengarten Bamberg'},
+     {t:'14:30', s:'老城 · 小威尼斯 · 旧市政厅 · 大教堂', d:'世界遗产老城', p:'Bamberg Altstadt'},
+     {t:'16:00', s:'出发去维尔茨堡', d:'约 1 小时'},
+     {t:'17:00', s:'抵达维尔茨堡玛丽蒂姆', d:'', p:'Maritim Hotel Würzburg'},
+     {t:'18:30', s:'晚餐', d:'推荐：弗兰肯葡萄酒 + 本地菜'}
+   ], route:['纽伦堡喜来登','班贝格新宫','维尔茨堡玛丽蒂姆'],
+   alt:'如果想进纽伦堡城堡内部或去 Breuninger 奢华百货：08:30 出发，先看城堡约 1 小时，10:00 出发去班贝格。班贝格新宫 15:30 最后入场仍来得及，但老城游览时间会缩短。Breuninger（Dolce & Gabbana · Burberry · Jimmy Choo · Valentino · Saint Laurent）位于 Karolinenstraße 34。'},
+
+  {n:10, date:'10/5', wd:'周一', title:'维尔茨堡 → Wertheim Village → 回维尔茨堡', stay:'维尔茨堡玛丽蒂姆', drive:'往返 60km / 1h', color:'#20c997',
+   items:[
+     {t:'10:00', s:'维尔茨堡主教宫', d:'9:00–18:00 · 最后入场 17:15 · 3 人已预约', must:1, p:'Residenz Würzburg'},
+     {t:'12:00', s:'老城 · 美因河老桥 · 要塞外观', d:'', p:'Alte Mainbrücke Würzburg'},
+     {t:'12:15', s:'NO REGRETS（设计师概念店）', d:'独家时装 · 配饰 · 美妆', p:'NO REGRETS Würzburg'},
+     {t:'12:30', s:'午餐', d:''},
+     {t:'13:00', s:'GALERIA Kaufhof（德国连锁百货）', d:'德国品牌日用商品', p:'GALERIA Kaufhof Würzburg'},
+     {t:'13:30', s:'出发去 Wertheim Village', d:'约 30 分钟'},
+     {t:'14:00', s:'Wertheim Village 奥特莱斯', d:'Burberry · Coach · Michael Kors · 轻奢为主 · 约 2.5 小时', p:'Wertheim Village'},
+     {t:'17:00', s:'回维尔茨堡', d:'约 30 分钟'},
+     {t:'18:30', s:'晚餐', d:''}
+   ], route:['维尔茨堡玛丽蒂姆','Wertheim Village','维尔茨堡玛丽蒂姆']},
+
+  {n:11, date:'10/6', wd:'周二', title:'维尔茨堡 → 法兰克福机场 → 上海', stay:'回程', drive:'120km / 1h20', color:'#adb5bd',
+   items:[
+     {t:'08:00', s:'早餐 · 退房 · 整理行李', d:''},
+     {t:'10:30', s:'出发去法兰克福机场', d:'120km / 1h20', must:1, p:'Frankfurt Airport'},
+     {t:'11:50', s:'抵达 FRA · 还车', d:'Europcar：Airport City Mall', p:'Frankfurt Airport City Mall'},
+     {t:'12:30', s:'进航站楼', d:'可逛免税店', p:'Frankfurt Airport Terminal 1'},
+     {t:'15:40', s:'LH728 起飞', d:'法兰克福 → 上海 · 11h35'},
+     {t:'09:15 +1', s:'抵达上海 PVG', d:'行程结束'}
+   ], route:['维尔茨堡玛丽蒂姆','法兰克福机场']}
+];
+
+var SHOPS = [
+  {city:'萨尔茨堡', color:'#ff6b6b', places:[
+    {n:'科尔市场 Alter Markt', t:'顶奢集中地', b:'Hermès · LV · Chanel · Gucci · Cartier · Tiffany · Bulgari · Burberry', a:'Alter Markt, 5020 Salzburg'},
+    {n:'ICON Salzburg', t:'设计师买手店', b:'Balenciaga · Alexander McQueen · Loewe · Tom Ford · Golden Goose · Off-White', a:'Münzgasse 2, 5020 Salzburg'},
+    {n:'粮食胡同 Getreidegasse', t:'传统+大众品牌', b:'Louis Vuitton · Swarovski · Tommy Hilfiger · Bally · Escada · 莫扎特巧克力', a:'Getreidegasse, 5020 Salzburg'},
+    {n:'Designer Outlet Salzburg', t:'折扣奥莱', b:'Zegna · Valentino · Karl Lagerfeld · Hugo Boss · Coach · Polo Ralph Lauren', a:'Kasernenstraße 1, 5073 Wals-Himmelreich'}
+  ]},
+  {city:'因斯布鲁克', color:'#51cf66', places:[
+    {n:'玛丽亚·特蕾西亚大街', t:'豪华购物街', b:'国际品牌旗舰店集中', a:'Maria-Theresien-Straße, 6020 Innsbruck'},
+    {n:'Einwaller', t:'顶奢买手店', b:'Prada · Valentino · Saint Laurent · Moncler · Alexander McQueen · Zimmermann', a:'Maria-Theresien-Straße, 6020 Innsbruck'},
+    {n:'Kaufhaus Tyrol', t:'购物中心', b:"Levi's · Swatch · Esprit", a:'Maria-Theresien-Straße 31, 6020 Innsbruck'},
+    {n:'Swarovski 市区店', t:'当地特色', b:'水晶饰品', a:'Herzog-Friedrich-Straße 38, 6020 Innsbruck'}
+  ]},
+  {city:'慕尼黑', color:'#9775fa', places:[
+    {n:'马克西米利安大街', t:'顶奢一条街', b:'Hermès · Chanel · LV · Gucci · Dior · Armani · Loewe · Balenciaga · Van Cleef', a:'Maximilianstraße, 80539 München'},
+    {n:'Oberpollinger', t:'高端百货', b:'Celine · Dior · Gucci · Prada · Balmain · Givenchy · Rolex · Cartier', a:'Neuhauser Straße 18, 80331 München'},
+    {n:'Fünf Höfe', t:'购物中心', b:'The Row · Gucci · Chloé · Prada · Bottega Veneta · Valentino', a:'Theatinerstraße 15, 80333 München'},
+    {n:'考芬格大街', t:'大众品牌', b:'Zara · H&M · Apple Store · Douglas', a:'Kaufingerstraße, 80331 München'},
+    {n:'维克图阿连市场', t:'食品+纪念品', b:'德国食品 · 伴手礼', a:'Viktualienmarkt, 80331 München'}
+  ]},
+  {city:'罗腾堡', color:'#f06595', places:[
+    {n:'Käthe Wohlfahrt 圣诞商店', t:'全球最大圣诞装饰店', b:'胡桃夹子 · 德国传统圣诞装饰（国庆日可能关门）', a:'Herrngasse 1, 91541 Rothenburg'}
+  ]},
+  {city:'纽伦堡', color:'#f06595', places:[
+    {n:'Breuninger', t:'奢华百货', b:'Dolce & Gabbana · Burberry · Jimmy Choo · Valentino · Celine · Saint Laurent', a:'Karolinenstraße 34, 90402 Nürnberg'},
+    {n:'Karolinenstraße', t:'购物街', b:'H&M · Zara 等大众品牌', a:'Karolinenstraße, 90402 Nürnberg'}
+  ]},
+  {city:'班贝格', color:'#20c997', places:[
+    {n:'老城独立小店', t:'当地特色', b:'烟熏啤酒 · 陶瓷啤酒杯 · 手工玻璃制品', a:'Bamberg Altstadt'},
+    {n:'KARSTADT', t:'德国连锁百货', b:'德国品牌日用商品', a:'Lange Straße 22, 96047 Bamberg'}
+  ]},
+  {city:'维尔茨堡', color:'#20c997', places:[
+    {n:'Wertheim Village', t:'折扣奥莱', b:'Burberry · Coach · Michael Kors · 轻奢为主', a:'Almosenberg 2, 97877 Wertheim'},
+    {n:'GALERIA Kaufhof', t:'德国连锁百货', b:'德国品牌日用商品', a:'Schönbornstraße 3, 97070 Würzburg'},
+    {n:'NO REGRETS', t:'设计师概念店', b:'独家时装 · 配饰 · 美妆', a:'Blasiusgasse 9, 97070 Würzburg'},
+    {n:'SCHEUBLE', t:'劳力士特约零售商', b:'Rolex', a:'Würzburg'}
+  ]},
+  {city:'法兰克福', color:'#adb5bd', places:[
+    {n:'歌德大街 Goethestraße', t:'顶奢一条街', b:'Armani · Burberry · Chanel · Gucci · Hermès · LV · Prada · Tiffany · Cartier · Miu Miu', a:'Goethestraße, 60313 Frankfurt'},
+    {n:'法兰克福机场免税店', t:'免税', b:'化妆品 · 香水 · 烟酒', a:'Frankfurt Airport'}
+  ]}
+];
+
+var TODO = [
+  {cat:'出发前 · 必须办', items:[
+    '确认租车是否含奥地利高速贴纸（Vignette）——取车时问柜台',
+    '新天鹅堡门票已订，打印或存手机',
+    '维尔茨堡主教宫门票已订，确认 3 人份',
+    '萨尔茨堡盐矿门票：行前 1–2 天在 salzwelten.at 买',
+    '确认慕尼黑威斯汀 10/1–10/2 停车安全、不额外收费',
+    '纽伦堡喜来登确认 2 间房、早餐人数',
+    '德国环保绿标（Umweltplakette）——取车时确认车上有',
+    '护照、驾照、国际驾照翻译件、信用卡',
+    '欧洲插头转换器、充电宝',
+    '旅行保险单打印一份'
+  ]},
+  {cat:'出发前 · 建议办', items:[
+    '下载离线地图（Google Maps 离线区域）',
+    '把酒店地址存到手机离线备忘录',
+    '买一张欧洲上网卡或开通漫游',
+    '查一下啤酒节是否需要预订帐篷位',
+    '罗腾堡午餐餐厅提前订位（国庆日人多）'
+  ]},
+  {cat:'到当地 · 灵活办', items:[
+    '取车后加油、熟悉车型',
+    '确认玛丽恩桥是否开放',
+    '查 10/3 慕尼黑出城路况',
+    'Wertheim Village 是否想去更多时间'
+  ]}
+];
+
+var TIPS = [
+  {t:'时区', d:'全程 Europe/Berlin，夏令时 UTC+2；上海 UTC+8，差 6 小时。页面内所有时间都已带时区，跨时区打开不会算错。'},
+  {t:'开车', d:'德国高速部分路段不限速，建议保持 130km/h 以内。奥地利高速必须贴 Vignette，没贴罚款 €120 起。德国城市环保区必须有绿标。'},
+  {t:'停车', d:'德国城市停车费较贵，建议停在酒店车库。路边停车注意看标志，有些区域只允许居民停。'},
+  {t:'加油', d:'德国加油站多为自助，先加油后到柜台付钱。奥地利油价通常比德国略低，可在奥地利加满再回德国。'},
+  {t:'周日与假日', d:'德国周日和法定假日商店全部关门，餐厅、加油站、博物馆通常营业。10/3 是德国国庆日，10/4 是周日，这两天购物只能看橱窗。'},
+  {t:'小费', d:'德国和奥地利餐厅通常给 5–10% 小费，直接告诉服务员总金额即可。'},
+  {t:'紧急电话', d:'欧洲通用紧急电话 112。中国驻德国使馆 +49-30-27588500，中国驻奥地利使馆 +43-1-7143149。'},
+  {t:'啤酒节', d:'2026 年慕尼黑啤酒节 9/19–10/4。帐篷内需要消费，建议带现金。周末人极多，注意随身物品。'},
+  {t:'购物退税', d:'非欧盟居民购物满 €50 可退税。保留小票和退税单，在法兰克福机场办理。'},
+  {t:'折扣', d:'德国和奥地利部分商店对游客提供退税，结账时主动问“Tax Free?”。'}
+];
+
+function gmap(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);}
+function gdir(list){return 'https://www.google.com/maps/dir/?api=1&'+list.map(function(p,i){return (i===0?'origin=':'destination=')+encodeURIComponent(p);}).join('&');}
+
+/* 已确认（酒店和租车行名称可点击） */
+var bEl = document.getElementById('bookings'), bHtml = '';
+BOOKINGS.forEach(function(g){
+  bHtml += '<div class="booking-group"><div class="bg-title">'+g.icon+' '+g.label+'</div>';
+  g.items.forEach(function(it){
+    bHtml += '<div class="booking"><div class="b-head">';
+    if(it.pmap) bHtml += '<a class="b-code" href="'+gmap(it.pmap)+'" target="_blank" rel="noopener">'+it.code+' ↗</a>';
+    else bHtml += '<span class="b-code">'+it.code+'</span>';
+    bHtml += '<span class="b-date">'+it.date+'</span></div>';
+    bHtml += '<div class="b-route">'+it.route+'</div>';
+    if(it.note) bHtml += '<div class="b-note">'+it.note+'</div>';
+    if(it.addr) bHtml += '<div class="b-addr">📍 '+it.addr+'</div>';
+    if(it.tel) bHtml += '<a class="b-tel" href="tel:'+it.tel.split(' / ')[0].replace(/\s/g,'')+'">📞 '+it.tel+'</a>';
+    if(it.pmap) bHtml += '<a class="b-map" href="'+gmap(it.pmap)+'" target="_blank" rel="noopener">🗺 打开地图</a>';
+    bHtml += '</div>';
+  });
+  bHtml += '</div>';
+});
+bEl.innerHTML = bHtml;
+
+/* 逐日 */
+var dEl = document.getElementById('days'), dHtml = '';
+DAYS.forEach(function(day, idx){
+  dHtml += '<div class="day" data-idx="'+idx+'" style="--day-color:'+day.color+'">';
+  dHtml += '<div class="day-head"><div class="day-left"><div class="day-num">DAY '+day.n+'</div><div class="day-date">'+day.date+' '+day.wd+'</div></div>';
+  dHtml += '<div class="day-right"><div class="day-title">'+day.title+'</div><div class="day-meta">住 '+day.stay+' · '+day.drive+'</div></div>';
+  dHtml += '<svg class="day-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>';
+  dHtml += '<div class="day-body">';
+
+  if(day.route && day.route.length > 1){
+    dHtml += '<div class="day-map-top"><svg class="mini-map" viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg">';
+    var pts = day.route.map(function(n){return CITY[n];}).filter(Boolean);
+    for(var i=0;i<pts.length-1;i++){
+      dHtml += '<line x1="'+pts[i][0]+'" y1="'+pts[i][1]+'" x2="'+pts[i+1][0]+'" y2="'+pts[i+1][1]+'" stroke="'+day.color+'" stroke-width="4" stroke-linecap="round" opacity=".85"/>';
+    }
+    pts.forEach(function(p){
+      dHtml += '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="9" fill="var(--card)" stroke="'+day.color+'" stroke-width="4"/>';
+    });
+    dHtml += '</svg>';
+    dHtml += '<a class="nav-btn" href="'+gdir(day.route)+'" target="_blank" rel="noopener">🧭 一键导航全天路线（'+day.route.length+' 点）</a>';
+    dHtml += '</div>';
+  }
+
+  dHtml += '<div class="tl">';
+  day.items.forEach(function(it){
+    dHtml += '<div class="tl-item"><div class="tl-time">'+it.t+'</div><div class="tl-title">';
+    if(it.p) dHtml += '<a href="'+gmap(it.p)+'" target="_blank" rel="noopener">'+it.s+'</a>';
+    else dHtml += it.s;
+    if(it.must) dHtml += '<span class="tl-must">提前</span>';
+    dHtml += '</div>';
+    if(it.d) dHtml += '<div class="tl-note">'+it.d+'</div>';
+    dHtml += '</div>';
+  });
+  dHtml += '</div>';
+
+  if(day.alt) dHtml += '<div class="tl-note" style="margin-top:12px;padding:10px 12px;background:var(--bg);border-radius:10px;border-left:3px solid '+day.color+'">'+day.alt+'</div>';
+  dHtml += '</div></div>';
+});
+dEl.innerHTML = dHtml;
+
+dEl.addEventListener('click', function(e){
+  if(e.target.closest('a')) return;
+  var head = e.target.closest('.day-head');
+  if(!head) return;
+  head.parentElement.classList.toggle('open');
+});
+
+/* 购物点 */
+var sEl = document.getElementById('shops'), sHtml = '';
+SHOPS.forEach(function(city){
+  sHtml += '<div class="shop-city" style="--city-color:'+city.color+'"><h3>'+city.city+'</h3>';
+  sHtml += '<div class="shop-count">'+city.places.length+' 个购物点</div>';
+  city.places.forEach(function(p){
+    sHtml += '<div class="shop-item"><div class="shop-name"><a href="'+gmap(p.a)+'" target="_blank" rel="noopener">'+p.n+'</a><span class="shop-tag">'+p.t+'</span></div>';
+    sHtml += '<div class="shop-brands">'+p.b+'</div>';
+    sHtml += '<div class="shop-addr"><a href="'+gmap(p.a)+'" target="_blank" rel="noopener">📍 '+p.a+'</a></div></div>';
+  });
+  sHtml += '</div>';
+});
+sEl.innerHTML = sHtml;
+
+/* 待办 */
+var tEl = document.getElementById('todo'), tHtml = '';
+TODO.forEach(function(g){
+  tHtml += '<div class="todo-cat">'+g.cat+'</div><ul>';
+  g.items.forEach(function(i){ tHtml += '<li>'+i+'</li>'; });
+  tHtml += '</ul>';
+});
+tEl.innerHTML = tHtml;
+
+/* 贴士 */
+var pEl = document.getElementById('tips'), pHtml = '';
+TIPS.forEach(function(t){
+  pHtml += '<div class="tip"><div class="tip-t">'+t.t+'</div><div class="tip-d">'+t.d+'</div></div>';
+});
+pEl.innerHTML = pHtml;
+
+/* 倒计时 */
+var nowEvent = document.getElementById('nowEvent'), nowNote = document.getElementById('nowNote'),
+    nowTime = document.getElementById('nowTime'),
+    cdD=document.getElementById('cdD'),cdH=document.getElementById('cdH'),
+    cdM=document.getElementById('cdM'),cdS=document.getElementById('cdS');
+var TS = EVENTS.map(function(e){return {t:new Date(e.ts).getTime(), e:e};});
+function pad(n){return n<10?'0'+n:''+n;}
+
+function tick(){
+  var now = Date.now(), nxt = null;
+  for(var i=0;i<TS.length;i++){ if(TS[i].t > now){ nxt = TS[i]; break; } }
+  if(!nxt){
+    nowEvent.textContent = '行程已完成';
+    nowNote.textContent = '';
+    cdD.textContent = cdH.textContent = cdM.textContent = cdS.textContent = '—';
+  } else {
+    nowEvent.textContent = nxt.e.title;
+    nowNote.textContent = nxt.e.note || '';
+    var diff = nxt.t - now;
+    cdD.textContent = Math.floor(diff/86400000);
+    cdH.textContent = pad(Math.floor((diff%86400000)/3600000));
+    cdM.textContent = pad(Math.floor((diff%3600000)/60000));
+    cdS.textContent = pad(Math.floor((diff%60000)/1000));
+  }
+  nowTime.textContent = '你所在时区：' + new Date().toLocaleString('zh-CN',{hour12:false});
+}
+tick(); setInterval(tick, 1000);
+
+})();
+</script>
+</body>
+</html>
