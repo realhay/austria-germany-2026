@@ -94,7 +94,6 @@ a.b-code{color:var(--accent);border-bottom-color:var(--accent)}
 .tl-title a{color:var(--text);text-decoration:none;border-bottom:1px dashed var(--line);font-weight:500}
 .tl-note{font-size:12.5px;color:var(--text2);margin-top:2px;line-height:1.45}
 .tl-must{display:inline-block;font-size:10.5px;font-weight:600;background:#ff9500;color:#fff;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:1px}
-.weather-badge{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;background:var(--bg);padding:2px 8px;border-radius:10px;color:var(--text2);margin-bottom:10px}
 .shop-city{background:var(--card);border-radius:16px;margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
 .shop-city-head{padding:14px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
 .shop-city-head::before{content:'';width:9px;height:9px;border-radius:50%;background:var(--city-color,#999);flex-shrink:0}
@@ -363,11 +362,11 @@ footer{text-align:center;font-size:11.5px;color:var(--text2);margin:32px 16px 16
 (function(){
 'use strict';
 
-try{setTheme();setInterval(setTheme,60000);}catch(e){console.log(e);}
 function setTheme(){
   var h = new Date().getHours();
   document.documentElement.dataset.theme = (h >= 6 && h < 18) ? 'light' : 'dark';
 }
+setTheme();setInterval(setTheme,60000);
 
 var EVENTS = [
   {ts:'2026-09-25T23:10:00+08:00', title:'LH727 上海起飞', note:'浦东 PVG → 慕尼黑 MUC'},
@@ -432,7 +431,7 @@ var TICKETS = [
 ];
 
 var DAYS = [
-  {n:1, date:'9/26', wd:'周六', title:'上海 → 慕尼黑 → 萨尔茨堡', stay:'萨尔茨堡喜来登', drive:'150km / 1h45', color:'#ff6b6b', weather:'多云 10~20℃',
+  {n:1, date:'9/26', wd:'周六', title:'上海 → 慕尼黑 → 萨尔茨堡', stay:'萨尔茨堡喜来登', drive:'150km / 1h45', color:'#ff6b6b', weather:'🌦 多云 10~20℃',
    items:[
      {t:'06:20', s:'抵达慕尼黑 MUC T2', d:'LH727 落地 · 出关取行李约 1 小时', p:'München Flughafen Terminal 2'},
      {t:'07:30', s:'Europcar 取车', d:'机场 Airportcenter Ebene 3', p:'München Flughafen Airportcenter'},
@@ -445,7 +444,7 @@ var DAYS = [
      {t:'17:00', s:'米拉贝尔宫花园', d:'免费 · 《音乐之声》取景地', p:'Mirabellgarten Salzburg'},
      {t:'19:00', s:'晚餐', d:''}
    ], route:['慕尼黑机场','萨尔茨堡喜来登']},
-  {n:2, date:'9/27', wd:'周日', title:'萨尔茨堡 ⇄ 哈尔施塔特', stay:'萨尔茨堡喜来登', drive:'往返 150km / 2h40', color:'#ffa94d', weather:'小雨 12~22℃',
+  {n:2, date:'9/27', wd:'周日', title:'萨尔茨堡 ⇄ 哈尔施塔特', stay:'萨尔茨堡喜来登', drive:'往返 150km / 2h40', color:'#ffa94d', weather:'🌧 小雨 12~22℃',
    items:[
      {t:'07:30', s:'出发去哈尔施塔特', d:'必须早起 · 周日停车场 9 点后爆满', must:1},
      {t:'09:00', s:'抵达 P1/P2 停车场', d:'', p:'Parkplatz Hallstatt P1'},
@@ -456,7 +455,7 @@ var DAYS = [
      {t:'17:00', s:'萨尔茨堡要塞', d:'可坐缆车上要塞', p:'Festung Hohensalzburg'},
      {t:'19:00', s:'晚餐', d:''}
    ], route:['萨尔茨堡喜来登','哈尔施塔特','萨尔茨堡喜来登']},
-  {n:3, date:'9/28', wd:'周一', title:'萨尔茨堡 → 哈莱因盐矿 → 因斯布鲁克', stay:'因斯布鲁克假日酒店', drive:'230km / 2h45', color:'#51cf66', weather:'晴转多云 13~23℃',
+  {n:3, date:'9/28', wd:'周一', title:'萨尔茨堡 → 哈莱因盐矿 → 因斯布鲁克', stay:'因斯布鲁克假日酒店', drive:'230km / 2h45', color:'#51cf66', weather:'☀️ 晴转多云 13~23℃',
    items:[
      {t:'09:00', s:'出发去哈莱因盐矿', d:'萨尔茨堡出发约 30 分钟'},
      {t:'09:30', s:'抵达盐矿', d:'', p:'Salzwelten Salzburg'},
@@ -469,7 +468,7 @@ var DAYS = [
      {t:'18:30', s:'黄金屋顶', d:'', p:'Goldenes Dachl Innsbruck'},
      {t:'19:30', s:'晚餐', d:'推荐：蒂罗尔传统菜'}
    ], route:['萨尔茨堡喜来登','哈莱因盐矿','因斯布鲁克假日酒店']},
-  {n:4, date:'9/29', wd:'周二', title:'因斯布鲁克 → 新天鹅堡 → 菲森', stay:'菲森索内酒店', drive:'115km / 1h45', color:'#339af0', weather:'多云 9~18℃',
+  {n:4, date:'9/29', wd:'周二', title:'因斯布鲁克 → 新天鹅堡 → 菲森', stay:'菲森索内酒店', drive:'115km / 1h45', color:'#339af0', weather:'☁️ 多云 9~18℃',
    items:[
      {t:'07:00', s:'出发去新天鹅堡', d:'必须早起 · 票是 09:00 场次', must:1},
      {t:'09:00', s:'新天鹅堡参观', d:'Tour 412 · 中文语音导览', p:'Schloss Neuschwanstein'},
@@ -480,7 +479,7 @@ var DAYS = [
      {t:'15:30', s:'菲森老城', d:'中世纪小巷', p:'Füssen Altstadt'},
      {t:'19:00', s:'晚餐', d:''}
    ], route:['因斯布鲁克假日酒店','新天鹅堡','菲森索内酒店']},
-  {n:5, date:'9/30', wd:'周三', title:'菲森 → 慕尼黑', stay:'慕尼黑威斯汀', drive:'130km / 1h45', color:'#9775fa', weather:'晴 10~19℃',
+  {n:5, date:'9/30', wd:'周三', title:'菲森 → 慕尼黑', stay:'慕尼黑威斯汀', drive:'130km / 1h45', color:'#9775fa', weather:'☀️ 晴 10~19℃',
    items:[
      {t:'10:00', s:'出发去慕尼黑', d:'130km / 1h45'},
      {t:'12:00', s:'抵达慕尼黑威斯汀', d:'停车入住', p:'The Westin Grand Munich'},
@@ -492,7 +491,7 @@ var DAYS = [
      {t:'17:30', s:'维克图阿连市场', d:'德国食品 · 伴手礼', p:'Viktualienmarkt München'},
      {t:'19:30', s:'啤酒节', d:'特蕾西娅草坪', p:'Theresienwiese München'}
    ], route:['菲森索内酒店','慕尼黑威斯汀']},
-  {n:6, date:'10/1', wd:'周四', title:'慕尼黑 → 马耳他', stay:'马耳他', drive:'—', color:'#ff922b', weather:'晴 11~20℃',
+  {n:6, date:'10/1', wd:'周四', title:'慕尼黑 → 马耳他', stay:'马耳他', drive:'—', color:'#ff922b', weather:'☀️ 晴 11~20℃',
    items:[
      {t:'09:30', s:'宁芬堡宫（通票）', d:'含宫殿、马车博物馆、瓷器博物馆', p:'Nymphenburg Palace'},
      {t:'12:00', s:'回酒店取行李', d:'', p:'The Westin Grand Munich'},
@@ -501,14 +500,14 @@ var DAYS = [
      {t:'17:10', s:'KM309 起飞', d:'慕尼黑 → 马耳他 · 2h20'},
      {t:'19:30', s:'落地马耳他 MLA', d:'', p:'Malta International Airport'}
    ], route:['慕尼黑威斯汀','慕尼黑机场']},
-  {n:7, date:'10/2', wd:'周五', title:'马耳他 → 慕尼黑', stay:'慕尼黑威斯汀', drive:'—', color:'#ff922b', weather:'晴 11~20℃',
+  {n:7, date:'10/2', wd:'周五', title:'马耳他 → 慕尼黑', stay:'慕尼黑威斯汀', drive:'—', color:'#ff922b', weather:'☀️ 晴 11~20℃',
    items:[
      {t:'17:55', s:'LH1925 马耳他起飞', d:'实际乘坐汉莎', p:'Malta International Airport'},
      {t:'20:20', s:'落地慕尼黑 MUC T2', d:'', p:'München Flughafen Terminal 2'},
      {t:'21:30', s:'出关取行李', d:''},
      {t:'22:00', s:'回慕尼黑威斯汀', d:'', p:'The Westin Grand Munich'}
    ], route:['慕尼黑机场','慕尼黑威斯汀']},
-  {n:8, date:'10/3', wd:'周六', title:'慕尼黑 → 罗腾堡 → 纽伦堡', stay:'纽伦堡喜来登', drive:'350km / 3h30', color:'#f06595', weather:'多云 8~17℃',
+  {n:8, date:'10/3', wd:'周六', title:'慕尼黑 → 罗腾堡 → 纽伦堡', stay:'纽伦堡喜来登', drive:'350km / 3h30', color:'#f06595', weather:'☁️ 多云 8~17℃',
    items:[
      {t:'08:30', s:'出发去罗腾堡', d:'国庆日 + 啤酒节最后周六 · 出城可能堵', must:1},
      {t:'10:30', s:'抵达罗腾堡', d:'', p:'Rothenburg ob der Tauber'},
@@ -522,7 +521,7 @@ var DAYS = [
      {t:'16:30', s:'纽伦堡帝国城堡（通票）', d:'可俯瞰全城', p:'Nuremberg Imperial Castle'},
      {t:'19:00', s:'晚餐', d:'推荐：纽伦堡香肠'}
    ], route:['慕尼黑威斯汀','罗腾堡','纽伦堡喜来登']},
-  {n:9, date:'10/4', wd:'周日', title:'纽伦堡 → 班贝格 → 维尔茨堡', stay:'维尔茨堡玛丽蒂姆', drive:'165km / 2h', color:'#20c997', weather:'多云 9~17℃',
+  {n:9, date:'10/4', wd:'周日', title:'纽伦堡 → 班贝格 → 维尔茨堡', stay:'维尔茨堡玛丽蒂姆', drive:'165km / 2h', color:'#20c997', weather:'☁️ 多云 9~17℃',
    items:[
      {t:'10:00', s:'出发去班贝格', d:'睡饱再走'},
      {t:'11:00', s:'抵达班贝格 · 午餐', d:'建议：烟熏啤酒 + 猪肘', p:'Bamberg Altstadt'},
@@ -534,7 +533,7 @@ var DAYS = [
      {t:'18:30', s:'晚餐', d:'推荐：弗兰肯葡萄酒'}
    ], route:['纽伦堡喜来登','班贝格新宫','维尔茨堡玛丽蒂姆'],
    alt:'如果想进纽伦堡城堡内部或去 Breuninger 奢华百货：08:30 出发，先看城堡约 1 小时，10:00 出发去班贝格。班贝格新宫 15:30 最后入场仍来得及。'},
-  {n:10, date:'10/5', wd:'周一', title:'维尔茨堡 → Wertheim Village → 回维尔茨堡', stay:'维尔茨堡玛丽蒂姆', drive:'往返 60km / 1h', color:'#20c997', weather:'多云 9~16℃',
+  {n:10, date:'10/5', wd:'周一', title:'维尔茨堡 → Wertheim Village → 回维尔茨堡', stay:'维尔茨堡玛丽蒂姆', drive:'往返 60km / 1h', color:'#20c997', weather:'☁️ 多云 9~16℃',
    items:[
      {t:'10:00', s:'维尔茨堡主教宫（通票）', d:'9:00–18:00 · 3 人已预约', must:1, p:'Residenz Würzburg'},
      {t:'11:30', s:'玛丽恩贝格要塞（通票）', d:'美因河对岸 · 可俯瞰城市', p:'Marienberg Fortress'},
@@ -544,7 +543,7 @@ var DAYS = [
      {t:'17:00', s:'回维尔茨堡', d:'约 30 分钟'},
      {t:'18:30', s:'晚餐', d:''}
    ], route:['维尔茨堡玛丽蒂姆','Wertheim Village','维尔茨堡玛丽蒂姆']},
-  {n:11, date:'10/6', wd:'周二', title:'维尔茨堡 → 法兰克福机场 → 上海', stay:'回程', drive:'120km / 1h20', color:'#adb5bd', weather:'多云 10~17℃',
+  {n:11, date:'10/6', wd:'周二', title:'维尔茨堡 → 法兰克福机场 → 上海', stay:'回程', drive:'120km / 1h20', color:'#adb5bd', weather:'☁️ 多云 10~17℃',
    items:[
      {t:'08:00', s:'早餐 · 退房 · 整理行李', d:''},
      {t:'10:30', s:'出发去法兰克福机场', d:'120km / 1h20', must:1, p:'Frankfurt Airport'},
@@ -602,20 +601,40 @@ var PASS = [
   {city:'慕尼黑', color:'#1d6fe8', places:[
     {n:'慕尼黑皇宫 Residenz München', b:'包含珍宝馆、屈维利埃剧院', a:'Residenzstraße 1, 80333 München'},
     {n:'宁芬堡宫 Nymphenburg Palace', b:'含宫殿、马车博物馆、瓷器博物馆及园林宫殿', a:'Schlossrondell 1, 80638 München'},
-    {n:'施莱斯海姆宫 Schleißheim Palaces', b:'含旧宫、新宫和卢斯特海姆宫', a:'Max-Emanuel-Platz 1, 85764 Oberschleißheim'}
+    {n:'施莱斯海姆宫 Schleißheim Palaces', b:'含旧宫、新宫和卢斯特海姆宫', a:'Max-Emanuel-Platz 1, 85764 Oberschleißheim'},
+    {n:'鲁根霍夫别墅 Ruhmeshalle und Bavaria', b:'含名人堂和巴伐利亚雕像', a:'Theresienhöhe 16, 80339 München'}
   ]},
   {city:'纽伦堡', color:'#f06595', places:[
     {n:'纽伦堡帝国城堡 Nuremberg Imperial Castle', b:'位于纽伦堡老城，可俯瞰全城', a:'Burg 13, 90403 Nürnberg'}
   ]},
   {city:'班贝格', color:'#20c997', places:[
-    {n:'班贝格新宫 Neue Residenz Bamberg', b:'包含玫瑰花园，可俯瞰老城', a:'Domplatz 8, 96049 Bamberg'}
+    {n:'班贝格新宫 Neue Residenz Bamberg', b:'包含玫瑰花园，可俯瞰老城', a:'Domplatz 8, 96049 Bamberg'},
+    {n:'塞霍夫宫 Schloss Seehof', b:'位于班贝格/梅默尔斯多夫，含花园', a:'Schloss Seehof, 96117 Memmelsdorf'}
   ]},
   {city:'维尔茨堡', color:'#20c997', places:[
     {n:'维尔茨堡主教宫 Würzburg Residence', b:'世界文化遗产，Tiepolo天顶画', a:'Residenzplatz 2, 97070 Würzburg'},
     {n:'玛丽恩贝格要塞 Marienberg Fortress', b:'位于美因河对岸，可俯瞰城市', a:'Festung Marienberg, 97082 Würzburg'}
   ]},
   {city:'菲森/施万高', color:'#339af0', places:[
-    {n:'新天鹅堡 Neuschwanstein Castle', b:'通票包含，但需提前预约入场时段', a:'Neuschwansteinstraße 20, 87645 Schwangau'}
+    {n:'新天鹅堡 Neuschwanstein Castle', b:'通票包含，但需提前预约入场时段', a:'Neuschwansteinstraße 20, 87645 Schwangau'},
+    {n:'林德霍夫宫 Linderhof Palace', b:'路德维希二世三大宫殿之一，位于Ettal', a:'Linderhof 12, 82488 Ettal'}
+  ]},
+  {city:'拜罗伊特', color:'#f06595', places:[
+    {n:'拜罗伊特新宫 Neues Schloss', b:'位于拜罗伊特，含花园', a:'Ludwigstraße 21, 95444 Bayreuth'},
+    {n:'边疆伯爵歌剧院 Markgräfliches Opernhaus', b:'世界文化遗产，巴洛克歌剧院', a:'Opernstraße 14, 95444 Bayreuth'},
+    {n:'老宫 Eremitage', b:'位于拜罗伊特，含花园', a:'Eremitage, 95448 Bayreuth'}
+  ]},
+  {city:'科堡', color:'#adb5bd', places:[
+    {n:'埃伦堡宫 Schloss Ehrenburg', b:'位于科堡，含宫殿博物馆', a:'Schlossplatz 1, 96450 Coburg'},
+    {n:'罗森瑙宫 Schloss Rosenau', b:'位于科堡/勒登塔尔，含花园', a:'Rosenau 1, 96450 Coburg'}
+  ]},
+  {city:'兰茨胡特', color:'#51cf66', places:[
+    {n:'特劳斯尼茨城堡 Burg Trausnitz', b:'位于兰茨胡特，可俯瞰城市', a:'Burg Trausnitz 168, 84036 Landshut'},
+    {n:'城市宫殿 Stadtresidenz', b:'位于兰茨胡特', a:'Altstadt 79, 84028 Landshut'}
+  ]},
+  {city:'雷根斯堡', color:'#20c997', places:[
+    {n:'瓦尔哈拉神殿 Walhalla', b:'位于多瑙斯陶夫，纪念德国名人', a:'Walhallastraße 48, 93093 Donaustauf'},
+    {n:'解放纪念馆 Befreiungshalle', b:'位于凯尔海姆，纪念拿破仑战争', a:'Befreiungshallestraße 3, 93309 Kelheim'}
   ]}
 ];
 
@@ -676,7 +695,6 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 function getDone(key){try{return JSON.parse(localStorage.getItem(key)||'[]');}catch(e){return [];}}
 function setDone(key,arr){try{localStorage.setItem(key,JSON.stringify(arr));}catch(e){}}
 
-/* 标签切换 */
 try{
   var tabs = document.getElementById('tabs');
   tabs.addEventListener('click', function(e){
@@ -692,7 +710,6 @@ try{
   });
 }catch(e){console.log('tabs err',e);}
 
-/* 航班 */
 try{
   var fEl = document.getElementById('flightSlider'), fHtml = '';
   FLIGHTS.forEach(function(f){
@@ -704,7 +721,6 @@ try{
   fEl.innerHTML = fHtml;
 }catch(e){console.log('flights err',e);}
 
-/* 租车 */
 try{
   var cEl = document.getElementById('carList'), cHtml = '';
   CARS.forEach(function(c){
@@ -719,7 +735,6 @@ try{
   cEl.innerHTML = cHtml;
 }catch(e){console.log('cars err',e);}
 
-/* 酒店 */
 try{
   var hEl = document.getElementById('hotelList'), hHtml = '';
   HOTELS.forEach(function(h){
@@ -733,7 +748,6 @@ try{
   hEl.innerHTML = hHtml;
 }catch(e){console.log('hotels err',e);}
 
-/* 门票 */
 try{
   var kEl = document.getElementById('ticketList'), kHtml = '';
   TICKETS.forEach(function(t){
@@ -746,29 +760,34 @@ try{
   kEl.innerHTML = kHtml;
 }catch(e){console.log('tickets err',e);}
 
-/* 通票列表 */
 try{
   var passEl = document.getElementById('passList'), passHtml = '';
-  PASS.forEach(function(city){
-    passHtml += '<div class="shop-city" style="--city-color:'+city.color+'"><h3 style="font-size:14px;font-weight:700;margin:0 0 4px;padding:14px 16px 0">'+city.city+'</h3>';
-    passHtml += '<div class="shop-count" style="font-size:11.5px;color:var(--text2);padding:0 16px 10px">'+city.places.length+' 个可用景点</div>';
+  PASS.forEach(function(city, ci){
+    passHtml += '<div class="shop-city'+(ci===0?' open':'')+'" style="--city-color:'+city.color+'">';
+    passHtml += '<div class="shop-city-head"><span class="sc-name">'+city.city+'</span><span class="sc-cnt">'+city.places.length+' 个</span>';
+    passHtml += '<svg class="sc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>';
+    passHtml += '<div class="shop-city-body">';
     city.places.forEach(function(p){
       passHtml += '<div class="shop-item"><div class="shop-name"><a href="'+gmap(p.a)+'" target="_blank" rel="noopener">'+p.n+'</a><span class="shop-tag">通票</span></div>';
       passHtml += '<div class="shop-brands">'+p.b+'</div>';
       passHtml += '<div class="shop-addr"><a href="'+gmap(p.a)+'" target="_blank" rel="noopener">📍 '+p.a+'</a></div></div>';
     });
-    passHtml += '</div>';
+    passHtml += '</div></div>';
   });
   passEl.innerHTML = passHtml;
+  passEl.addEventListener('click', function(e){
+    var head = e.target.closest('.shop-city-head');
+    if(!head) return;
+    head.parentElement.classList.toggle('open');
+  });
 }catch(e){console.log('pass err',e);}
 
-/* 复制坐标 */
 try{
   var copyBtn = document.getElementById('copyCoordsBtn');
   if(copyBtn){
     copyBtn.addEventListener('click', function(e){
       e.preventDefault();
-      var coords = 'Residenz München: 48.1415,11.5796\nNymphenburg Palace: 48.1583,11.5037\nSchleißheim Palaces: 48.2494,11.5592\nNuremberg Imperial Castle: 49.4578,11.0757\nNeue Residenz Bamberg: 49.8916,10.8827\nWürzburg Residence: 49.7927,9.9389\nMarienberg Fortress: 49.7904,9.9191\nNeuschwanstein Castle: 47.5576,10.7498';
+      var coords = 'Residenz München: 48.1415,11.5796\nNymphenburg Palace: 48.1583,11.5037\nSchleißheim Palaces: 48.2494,11.5592\nNuremberg Imperial Castle: 49.4578,11.0757\nNeue Residenz Bamberg: 49.8916,10.8827\nSchloss Seehof: 49.8766,10.8965\nWürzburg Residence: 49.7927,9.9389\nMarienberg Fortress: 49.7904,9.9191\nNeuschwanstein Castle: 47.5576,10.7498\nLinderhof Palace: 47.5714,10.9585\nNeues Schloss Bayreuth: 49.9452,11.5789\nMarkgräfliches Opernhaus: 49.9445,11.5785\nSchloss Ehrenburg: 50.2596,10.9642\nSchloss Rosenau: 50.2936,11.0149\nBurg Trausnitz: 48.5317,12.1533\nStadtresidenz Landshut: 48.5369,12.1522\nWalhalla: 49.0322,12.2225\nBefreiungshalle: 48.9181,11.8618';
       if(navigator.clipboard && navigator.clipboard.writeText){
         navigator.clipboard.writeText(coords).then(function(){
           copyBtn.textContent = '✅ 已复制！粘贴到 Google My Maps 即可';
@@ -784,16 +803,14 @@ try{
   }
 }catch(e){console.log('copy err',e);}
 
-/* 逐日 */
 try{
   var dEl = document.getElementById('days'), dHtml = '';
   DAYS.forEach(function(day, idx){
     dHtml += '<div class="day" data-idx="'+idx+'" style="--day-color:'+day.color+'">';
     dHtml += '<div class="day-head"><div class="day-left"><div class="day-num">DAY '+day.n+'</div><div class="day-date">'+day.date+' '+day.wd+'</div></div>';
-    dHtml += '<div class="day-right"><div class="day-title">'+day.title+'</div><div class="day-meta">住 '+day.stay+' · '+day.drive+'</div></div>';
+    dHtml += '<div class="day-right"><div class="day-title">'+day.title+'</div><div class="day-meta">住 '+day.stay+' · '+day.drive+' · '+day.weather+'</div></div>';
     dHtml += '<svg class="day-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>';
     dHtml += '<div class="day-body">';
-    if(day.weather) dHtml += '<div class="weather-badge">🌡 '+day.weather+'</div>';
     if(day.route && day.route.length > 1){
       dHtml += '<div class="day-map-top"><svg class="mini-map" viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg">';
       var pts = day.route.map(function(n){return CITY[n];}).filter(Boolean);
@@ -827,7 +844,6 @@ try{
   });
 }catch(e){console.log('days err',e);}
 
-/* 购物 */
 try{
   var sEl = document.getElementById('shops'), sHtml = '';
   SHOPS.forEach(function(city, ci){
@@ -850,7 +866,6 @@ try{
   });
 }catch(e){console.log('shops err',e);}
 
-/* 待办 */
 try{
   var TODO_KEY = 'travel_todo_v1';
   var tEl = document.getElementById('todo');
@@ -881,7 +896,6 @@ try{
   });
 }catch(e){console.log('todo err',e);}
 
-/* 行李 */
 try{
   var PACK_KEY = 'travel_pack_v1';
   var pkEl = document.getElementById('packing');
@@ -912,7 +926,6 @@ try{
   });
 }catch(e){console.log('packing err',e);}
 
-/* 贴士 */
 try{
   var pEl = document.getElementById('tips'), pHtml = '';
   TIPS.forEach(function(t){
@@ -921,7 +934,6 @@ try{
   pEl.innerHTML = pHtml;
 }catch(e){console.log('tips err',e);}
 
-/* 倒计时（放在最后，确保不受前面影响） */
 try{
   var nowEvent = document.getElementById('nowEvent'), nowNote = document.getElementById('nowNote'), nowTime = document.getElementById('nowTime');
   var cdD = document.getElementById('cdD'), cdH = document.getElementById('cdH'), cdM = document.getElementById('cdM'), cdS = document.getElementById('cdS');
