@@ -24,16 +24,48 @@ header .sub{margin:0;font-size:13px;color:var(--text2)}
 .cd-num{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
 .cd-unit{font-size:11px;color:var(--text2);margin-top:2px}
 .now-time{font-size:12px;color:var(--text2);margin-top:12px;text-align:center}
-.section{margin:28px 16px 0}
+
+/* 标签页 */
+.tabs{position:sticky;top:0;z-index:100;display:flex;gap:6px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;background:var(--bg);border-bottom:1px solid var(--line);transition:background .3s}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:8px 16px;background:var(--card);border:1px solid var(--line);border-radius:20px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.panel{display:none}
+.panel.active{display:block}
+
+.section{margin:20px 16px 0}
 .section h2{font-size:16px;font-weight:700;margin:0 0 12px;padding-left:2px}
-.map-wrap{background:var(--card);border-radius:18px;padding:16px 12px 10px;box-shadow:var(--shadow);overflow:hidden}
-.map-svg{width:100%;height:auto;display:block}
-.map-svg text,.mini-map text{fill:var(--text);paint-order:stroke;stroke:var(--card);stroke-width:3.5px;stroke-linejoin:round;font-family:inherit}
-.map-svg .city-dot,.mini-map .city-dot{fill:var(--card)}
-.map-svg a{cursor:pointer}
-.legend{display:flex;flex-wrap:wrap;gap:8px 14px;padding:14px 4px 4px;font-size:11px;color:var(--text2)}
-.legend span{display:inline-flex;align-items:center;gap:5px}
-.legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
+
+/* 地图 */
+.gmaps-wrap{margin:0 16px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:var(--card)}
+.gmaps-wrap iframe{display:block;width:100%;height:460px;border:0}
+.gmaps-btn{display:block;margin:10px 16px 0;padding:12px;background:var(--accent);color:#fff;border-radius:12px;text-align:center;text-decoration:none;font-size:14px;font-weight:600;box-shadow:var(--shadow)}
+.gmaps-btn:active{opacity:.8}
+
+/* 航班滑动卡片 */
+.flight-slider{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:4px 16px 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.flight-slider::-webkit-scrollbar{display:none}
+.flight-card{flex:0 0 85%;scroll-snap-align:center;background:var(--card);border-radius:20px;padding:20px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.fc-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
+.fc-num{font-size:17px;font-weight:700;letter-spacing:-.3px}
+.fc-num span{font-size:11px;font-weight:500;color:var(--text2);margin-left:6px}
+.fc-date{font-size:12px;color:var(--text2);font-variant-numeric:tabular-nums}
+.fc-route{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.fc-end{text-align:center;flex:0 0 auto;min-width:72px}
+.fc-time{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.5px;line-height:1.15}
+.fc-time sup{font-size:11px;font-weight:500;color:var(--text2);vertical-align:super;margin-left:1px}
+.fc-airport{font-size:15px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-top:3px}
+.fc-city{font-size:11.5px;color:var(--text2);margin-top:1px}
+.fc-mid{flex:1;text-align:center;padding:0 4px}
+.fc-dur{font-size:11.5px;color:var(--text2);font-weight:600;margin-bottom:6px}
+.fc-line{display:flex;align-items:center;gap:4px;justify-content:center}
+.fc-line .bar{flex:1;height:1.5px;background:var(--line);border-radius:1px}
+.fc-line .dot{width:5px;height:5px;border-radius:50%;background:var(--text2);flex-shrink:0}
+.fc-line svg{width:16px;height:16px;color:var(--accent);flex-shrink:0}
+.fc-stops{font-size:10.5px;color:var(--text2);margin-top:6px;text-align:center}
+.fc-slider-hint{font-size:11.5px;color:var(--text2);text-align:center;margin:0 16px 14px}
+
+/* 卡片 */
 .booking-group{margin-bottom:14px}
 .bg-title{font-size:13px;font-weight:600;color:var(--text2);margin:0 0 8px 4px}
 .booking{background:var(--card);border-radius:14px;padding:14px 16px;margin-bottom:8px;box-shadow:var(--shadow)}
@@ -47,6 +79,8 @@ a.b-code:active{opacity:.7}
 .b-addr{font-size:12px;color:var(--text2);margin-top:6px;line-height:1.5;white-space:pre-line}
 .b-tel{font-size:12px;color:var(--accent);margin-top:4px;text-decoration:none;display:inline-block;margin-right:12px}
 .b-map{font-size:12px;color:var(--accent);text-decoration:none;display:inline-block;margin-top:4px}
+
+/* 逐日 */
 .day{background:var(--card);border-radius:16px;margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden}
 .day-head{padding:14px 16px 14px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;position:relative}
 .day-head::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--day-color,#ccc)}
@@ -62,6 +96,7 @@ a.b-code:active{opacity:.7}
 .day.open .day-body{display:block}
 .day-map-top{margin:0 0 14px;padding:12px;background:var(--bg);border-radius:12px}
 .mini-map{width:100%;height:auto;display:block;max-height:180px}
+.mini-map text{fill:var(--text);paint-order:stroke;stroke:var(--card);stroke-width:3.5px;stroke-linejoin:round;font-family:inherit}
 .nav-btn{display:block;width:100%;margin-top:10px;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:13.5px;font-weight:600;text-align:center;text-decoration:none;cursor:pointer;font-family:inherit}
 .tl{position:relative;padding-left:70px}
 .tl::before{content:'';position:absolute;left:60px;top:14px;bottom:14px;width:1.5px;background:var(--line)}
@@ -73,10 +108,12 @@ a.b-code:active{opacity:.7}
 .tl-title a:active{border-bottom-color:var(--accent);color:var(--accent)}
 .tl-note{font-size:12.5px;color:var(--text2);margin-top:2px;line-height:1.45}
 .tl-must{display:inline-block;font-size:10.5px;font-weight:600;background:#ff9500;color:#fff;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:1px}
+
+/* 购物 */
 .shop-city{background:var(--card);border-radius:16px;padding:16px;margin-bottom:10px;box-shadow:var(--shadow)}
 .shop-city h3{font-size:14px;font-weight:700;margin:0 0 4px;display:flex;align-items:center;gap:8px}
 .shop-city h3::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--city-color,#999)}
-.shop-city .shop-count{font-size:11.5px;color:var(--text2);margin-bottom:10px}
+.shop-count{font-size:11.5px;color:var(--text2);margin-bottom:10px}
 .shop-item{padding:10px 0;border-top:1px solid var(--line)}
 .shop-item:first-of-type{border-top:none}
 .shop-name{font-size:13.5px;font-weight:600;line-height:1.4}
@@ -86,6 +123,8 @@ a.b-code:active{opacity:.7}
 .shop-brands{font-size:12.5px;color:var(--text2);margin-top:3px;line-height:1.5}
 .shop-addr{font-size:11.5px;color:var(--text2);margin-top:3px;opacity:.8}
 .shop-addr a{color:inherit;text-decoration:none}
+
+/* 待办、贴士 */
 .todo-list{background:var(--card);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
 .todo-cat{font-size:11px;font-weight:700;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin:14px 0 6px}
 .todo-cat:first-child{margin-top:0}
@@ -120,110 +159,97 @@ footer{text-align:center;font-size:11.5px;color:var(--text2);margin:32px 16px 16
   <div class="now-time" id="nowTime">—</div>
 </section>
 
-<section class="section">
-  <h2>行程总览</h2>
-  <div class="map-wrap">
-    <svg class="map-svg" viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg">
-      <!-- 慕尼黑机场 → 萨尔茨堡 -->
-      <path d="M433 307 Q 510 340 588 383" stroke="#ff6b6b" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
-      <!-- 萨尔茨堡 ⇄ 哈尔施塔特 -->
-      <path d="M588 383 Q 630 400 662 419" stroke="#ffa94d" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="7 5" opacity=".85"/>
-      <!-- 萨尔茨堡 → 哈莱因 → 因斯布鲁克（修复断档） -->
-      <path d="M588 383 Q 592 396 594 402 Q 500 448 385 460" stroke="#51cf66" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
-      <!-- 因斯布鲁克 → 新天鹅堡 → 菲森 -->
-      <path d="M385 460 Q 340 440 302 419" stroke="#339af0" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
-      <!-- 菲森 → 慕尼黑 -->
-      <path d="M299 418 Q 350 380 407 337" stroke="#9775fa" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
-      <!-- 慕尼黑 → 罗腾堡 → 纽伦堡 -->
-      <path d="M407 337 Q 320 240 235 161 Q 290 155 345 151" stroke="#f06595" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
-      <!-- 纽伦堡 → 班贝格 → 维尔茨堡 -->
-      <path d="M345 151 Q 332 118 322 88 Q 260 92 206 102" stroke="#20c997" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
-      <!-- 维尔茨堡 → 法兰克福机场 -->
-      <path d="M206 102 Q 130 80 50 57" stroke="#adb5bd" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".85"/>
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-tab="overview">总览</button>
+  <button class="tab" data-tab="bookings">已确认</button>
+  <button class="tab" data-tab="days">逐日行程</button>
+  <button class="tab" data-tab="shops">购物点</button>
+  <button class="tab" data-tab="todo">待办清单</button>
+  <button class="tab" data-tab="tips">实用贴士</button>
+</nav>
 
-      <!-- 城市点，可点击 -->
-      <a href="https://www.google.com/maps/search/?api=1&query=M%C3%BCnchen+Flughafen" target="_blank" rel="noopener">
-        <circle class="city-dot" cx="433" cy="307" r="6" stroke="#ff6b6b" stroke-width="3.5"/>
-        <text x="433" y="295" text-anchor="middle" font-size="13" font-weight="600">慕尼黑机场 ✈取车</text>
-      </a>
-      <a href="https://www.google.com/maps/search/?api=1&query=The+Westin+Grand+Munich" target="_blank" rel="noopener">
-        <circle class="city-dot" cx="407" cy="337" r="6" stroke="#ff6b6b" stroke-width="3.5"/>
-        <text x="407" y="360" text-anchor="middle" font-size="13" font-weight="600">慕尼黑</text>
-      </a>
-      <a href="https://www.google.com/maps/search/?api=1&query=Sheraton+Grand+Salzburg" target="_blank" rel="noopener">
-        <circle class="city-dot" cx="588" cy="383" r="6" stroke="#ff6b6b" stroke-width="3.5"/>
-        <text x="588" y="405" text-anchor="middle" font-size="13" font-weight="600">萨尔茨堡</text>
-      </a>
-      <a href="https://www.google.com/maps/search/?api=1&query=Hallstatt" target="_blank" rel="noopener">
-        <circle class="city-dot" cx="662" cy="419" r="6" stroke="#ffa94d" stroke-width="3.5"/>
-        <text x="662" y="441" text-anchor="middle" font-size="13" font-weight="600">哈尔施塔特</text>
-      </a>
-      <a href="https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Innsbruck" target="_blank" rel="noopener">
-        <circle class="city-dot" cx="385" cy="460" r="6" stroke="#51cf66" stroke-width="3.5"/>
-        <text x="385" y="482" text-anchor="middle" font-size="13" font-weight="600">因斯布鲁克</text>
-      </a>
-      <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Sonne+F%C3%BCssen" target="_blank" rel="noopener">
-        <circle class="city-dot" cx="299" cy="418" r="6" stroke="#339af0" stroke-width="3.5"/>
-        <text x="285" y="423" text-anchor="end" font-size="13" font-weight="600">菲森</text>
-      </a>
-      <a href="https://www.google.com/maps/search/?api=1&query=Rothenburg+ob+der+Tauber" target="_blank" rel="noopener">
-        <circle class="city-dot" cx="235" cy="161" r="6" stroke="#f06595" stroke-width="3.5"/>
-        <text x="221" y="166" text-anchor="end" font-size="13" font-weight="600">罗滕堡</text>
-      </a>
-      <a href="https://www.google.com/maps/search/?api=1&query=Sheraton+Carlton+N%C3%BCrnberg" target="_blank" rel="noopener">
-        <circle class="city-dot" cx="345" cy="151" r="6" stroke="#f06595" stroke-width="3.5"/>
-        <text x="345" y="138" text-anchor="middle" font-size="13" font-weight="600">纽伦堡</text>
-      </a>
-      <a href="https://www.google.com/maps/search/?api=1&query=Neue+Residenz+Bamberg" target="_blank" rel="noopener">
-        <circle class="city-dot" cx="322" cy="88" r="6" stroke="#20c997" stroke-width="3.5"/>
-        <text x="322" y="75" text-anchor="middle" font-size="13" font-weight="600">班贝格</text>
-      </a>
-      <a href="https://www.google.com/maps/search/?api=1&query=Maritim+Hotel+W%C3%BCrzburg" target="_blank" rel="noopener">
-        <circle class="city-dot" cx="206" cy="102" r="6" stroke="#20c997" stroke-width="3.5"/>
-        <text x="192" y="107" text-anchor="end" font-size="13" font-weight="600">维尔茨堡</text>
-      </a>
-      <a href="https://www.google.com/maps/search/?api=1&query=Frankfurt+Airport+City+Mall" target="_blank" rel="noopener">
-        <circle class="city-dot" cx="50" cy="57" r="6" stroke="#adb5bd" stroke-width="3.5"/>
-        <text x="50" y="80" text-anchor="middle" font-size="13" font-weight="600">法兰克福 ✈还车</text>
-      </a>
-    </svg>
-    <div class="legend">
-      <span><i style="background:#ff6b6b"></i>9/26–27 萨尔茨堡</span>
-      <span><i style="background:#ffa94d"></i>9/27 哈尔施塔特</span>
-      <span><i style="background:#51cf66"></i>9/28 因斯布鲁克</span>
-      <span><i style="background:#339af0"></i>9/29 菲森</span>
-      <span><i style="background:#9775fa"></i>9/30 慕尼黑</span>
-      <span><i style="background:#f06595"></i>10/3 纽伦堡</span>
-      <span><i style="background:#20c997"></i>10/4–5 维尔茨堡</span>
-      <span><i style="background:#adb5bd"></i>10/6 法兰克福</span>
+<main>
+  <!-- 总览 -->
+  <section class="panel active" id="panel-overview">
+    <div class="section" style="margin-top:16px">
+      <div class="gmaps-wrap">
+        <iframe
+          src="https://www.google.com/maps/dir/Munich+Airport/Salzburg/Hallstatt/Innsbruck/Neuschwanstein+Castle/Fussen/Munich/Rothenburg+ob+der+Tauber/Nuremberg/Bamberg/Wurzburg/Frankfurt+Airport?output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+      <a class="gmaps-btn" href="https://www.google.com/maps/dir/Munich+Airport/Salzburg/Hallstatt/Innsbruck/Neuschwanstein+Castle/Fussen/Munich/Rothenburg+ob+der+Tauber/Nuremberg/Bamberg/Wurzburg/Frankfurt+Airport" target="_blank" rel="noopener">🧭 在 Google Maps 打开完整路线</a>
     </div>
-  </div>
-</section>
+    <div class="section">
+      <h2>路线图例</h2>
+      <div class="shop-city" style="--city-color:#ff6b6b">
+        <div style="font-size:13px;line-height:1.9;color:var(--text2)">
+          <div><b style="color:#ff6b6b">9/26–27</b> 慕尼黑 → 萨尔茨堡 ⇄ 哈尔施塔特</div>
+          <div><b style="color:#51cf66">9/28</b> 萨尔茨堡 → 哈莱因盐矿 → 因斯布鲁克</div>
+          <div><b style="color:#339af0">9/29</b> 因斯布鲁克 → 新天鹅堡 → 菲森</div>
+          <div><b style="color:#9775fa">9/30</b> 菲森 → 慕尼黑（住 3 晚）</div>
+          <div><b style="color:#ff922b">10/1–2</b> 慕尼黑 ⇄ 马耳他</div>
+          <div><b style="color:#f06595">10/3</b> 慕尼黑 → 罗腾堡 → 纽伦堡</div>
+          <div><b style="color:#20c997">10/4–5</b> 纽伦堡 → 班贝格 → 维尔茨堡</div>
+          <div><b style="color:#adb5bd">10/6</b> 维尔茨堡 → 法兰克福机场 → 上海</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="section">
-  <h2>已确认</h2>
-  <div id="bookings"></div>
-</section>
+  <!-- 已确认 -->
+  <section class="panel" id="panel-bookings">
+    <div class="section">
+      <h2>✈️ 机票</h2>
+    </div>
+    <div class="flight-slider" id="flightSlider"></div>
+    <div class="fc-slider-hint">← 左右滑动查看每一程 →</div>
 
-<section class="section">
-  <h2>逐日行程</h2>
-  <div id="days"></div>
-</section>
+    <div class="section">
+      <h2>🚗 租车</h2>
+      <div id="carList"></div>
+    </div>
 
-<section class="section">
-  <h2>购物点</h2>
-  <div id="shops"></div>
-</section>
+    <div class="section">
+      <h2>🏨 酒店</h2>
+      <div id="hotelList"></div>
+    </div>
 
-<section class="section">
-  <h2>待办清单</h2>
-  <div id="todo" class="todo-list"></div>
-</section>
+    <div class="section">
+      <h2>🎫 门票</h2>
+      <div id="ticketList"></div>
+    </div>
+  </section>
 
-<section class="section">
-  <h2>实用贴士</h2>
-  <div id="tips" class="tips-list"></div>
-</section>
+  <!-- 逐日 -->
+  <section class="panel" id="panel-days">
+    <div class="section">
+      <div id="days"></div>
+    </div>
+  </section>
+
+  <!-- 购物 -->
+  <section class="panel" id="panel-shops">
+    <div class="section">
+      <div id="shops"></div>
+    </div>
+  </section>
+
+  <!-- 待办 -->
+  <section class="panel" id="panel-todo">
+    <div class="section">
+      <div id="todo" class="todo-list"></div>
+    </div>
+  </section>
+
+  <!-- 贴士 -->
+  <section class="panel" id="panel-tips">
+    <div class="section">
+      <div id="tips" class="tips-list"></div>
+    </div>
+  </section>
+</main>
 
 <footer>所有时间均为当地时间（Europe/Berlin, UTC+2）<br>点击地点名可唤起 Google 地图导航</footer>
 
@@ -231,11 +257,26 @@ footer{text-align:center;font-size:11.5px;color:var(--text2);margin:32px 16px 16
 (function(){
 'use strict';
 
+/* 主题 */
 function setTheme(){
   var h = new Date().getHours();
   document.documentElement.dataset.theme = (h >= 6 && h < 18) ? 'light' : 'dark';
 }
 setTheme(); setInterval(setTheme, 60000);
+
+/* 标签切换 */
+var tabs = document.getElementById('tabs');
+tabs.addEventListener('click', function(e){
+  var btn = e.target.closest('.tab');
+  if(!btn) return;
+  var target = btn.dataset.tab;
+  tabs.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  var panel = document.getElementById('panel-' + target);
+  if(panel) panel.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+});
 
 var EVENTS = [
   {ts:'2026-09-25T23:10:00+08:00', title:'LH727 上海起飞', note:'浦东 PVG → 慕尼黑 MUC · 经济舱'},
@@ -267,46 +308,52 @@ var EVENTS = [
 
 var CITY = {
   '慕尼黑机场':[433,307], '萨尔茨堡喜来登':[588,383], '哈尔施塔特':[662,419],
-  '哈莱因盐矿':[594,402], '因斯布鲁克假日酒店':[385,460], '新天鹅堡':[305,419],
+  '哈莱因盐矿':[594,402], '因斯布鲁克假日酒店':[385,460], '新天鹅堡':[302,419],
   '菲森索内酒店':[299,418], '慕尼黑威斯汀':[407,337], '罗腾堡':[235,161],
   '纽伦堡喜来登':[345,151], '班贝格新宫':[322,88], '维尔茨堡玛丽蒂姆':[206,102],
   '维尔茨堡主教宫':[210,100], 'Wertheim Village':[178,110], '法兰克福机场':[50,57]
 };
 
-var BOOKINGS = [
-  {icon:'✈️', label:'机票', items:[
-    {code:'LH727', date:'9/25 周五', route:'上海 PVG 23:10 → 慕尼黑 MUC 06:20 +1', note:'经济舱 · 13h10'},
-    {code:'KM309', date:'10/1 周四', route:'慕尼黑 MUC T2 17:10 → 马耳他 MLA 19:30', note:'马耳他航空 · 2h20'},
-    {code:'LH1925', date:'10/2 周五', route:'马耳他 MLA 17:55 → 慕尼黑 MUC T2 20:20', note:'实际乘坐汉莎 · 2h25'},
-    {code:'LH728', date:'10/6 周二', route:'法兰克福 FRA 15:40 → 上海 PVG 09:15 +1', note:'经济舱 · 11h35'}
-  ]},
-  {icon:'🚗', label:'租车', items:[
-    {code:'Europcar 取车', date:'9/26 07:30', route:'慕尼黑机场 T1 · Airportcenter Ebene 3',
-     note:'Volvo V60 或同级 · 含跨境费 · 含额外驾驶员 · 含异地还车 · 无限里程 · 全险',
-     addr:'Terminalstr. Mitte, Airportcenter Ebene 3, 85356 München',
-     tel:'+49 89 9735020', pmap:'München Flughafen Airportcenter'},
-    {code:'Europcar 还车', date:'10/6 13:00', route:'法兰克福机场 · Airport City Mall',
-     addr:'Airport City Mall, 60549 Frankfurt am Main',
-     tel:'+49 69 697970', pmap:'Frankfurt Airport City Mall'}
-  ]},
-  {icon:'🏨', label:'酒店', items:[
-    {code:'萨尔茨堡喜来登', date:'9/26 – 9/28 · 2 晚', route:'2 间经典大床房 · 含早',
-     addr:'Auerspergstraße 4, 5020 Salzburg', tel:'+43-662-889990', pmap:'Sheraton Grand Salzburg'},
-    {code:'因斯布鲁克假日酒店', date:'9/28 – 9/29 · 1 晚', route:'三人房 · 含早',
-     addr:'Bernhard-Höfel-Straße 16, 6020 Innsbruck', tel:'+43-512344333', pmap:'Holiday Inn Innsbruck'},
-    {code:'菲森索内酒店', date:'9/29 – 9/30 · 1 晚', route:'中等四人房 · 含早',
-     addr:'Prinzregentenpl. 1, 87629 Füssen', tel:'+49-83629080', pmap:'Hotel Sonne Füssen'},
-    {code:'慕尼黑威斯汀', date:'9/30 – 10/3 · 3 晚', route:'精致套房 · 含早',
-     addr:'Arabellastraße 6, 81925 München', tel:'+49-89-92640', pmap:'The Westin Grand Munich'},
-    {code:'纽伦堡喜来登', date:'10/3 – 10/4 · 1 晚', route:'2 间高级庭院景双床房 · 含早',
-     addr:'Eilgutstraße 15, 90443 Nürnberg', tel:'+49-911-20030', pmap:'Sheraton Carlton Nürnberg'},
-    {code:'维尔茨堡玛丽蒂姆', date:'10/4 – 10/6 · 2 晚', route:'舒适家庭房 · 含早',
-     addr:'Pleichertorstraße 5, 97070 Würzburg', tel:'+49-931-3053830', pmap:'Maritim Hotel Würzburg'}
-  ]},
-  {icon:'🎫', label:'门票', items:[
-    {code:'新天鹅堡', date:'9/29 09:00', route:'3 人 · Tour 412 · 中文语音导览', note:'已预约', pmap:'Schloss Neuschwanstein'},
-    {code:'维尔茨堡主教宫', date:'10/5', route:'3 人 · 免费入场', note:'已预约 · 9:00–18:00 · 最后入场 17:15', pmap:'Residenz Würzburg'}
-  ]}
+/* 航班数据 */
+var FLIGHTS = [
+  {num:'LH727', airline:'汉莎航空', date:'9月25日 周五', fromCode:'PVG', fromCity:'上海浦东', fromTime:'23:10', fromNext:false,
+   toCode:'MUC', toCity:'慕尼黑 T2', toTime:'06:20', toNext:true, dur:'13h10', stops:'直飞', note:'经济舱'},
+  {num:'KM309', airline:'马耳他航空', date:'10月1日 周四', fromCode:'MUC', fromCity:'慕尼黑 T2', fromTime:'17:10', fromNext:false,
+   toCode:'MLA', toCity:'马耳他', toTime:'19:30', toNext:false, dur:'2h20', stops:'直飞 · 空客 320-NEO', note:'经济舱'},
+  {num:'LH1925', airline:'汉莎航空（实际乘坐）', date:'10月2日 周五', fromCode:'MLA', fromCity:'马耳他', fromTime:'17:55', fromNext:false,
+   toCode:'MUC', toCity:'慕尼黑 T2', toTime:'20:20', toNext:false, dur:'2h25', stops:'直飞 · 空客 320', note:'经济舱'},
+  {num:'LH728', airline:'汉莎航空', date:'10月6日 周二', fromCode:'FRA', fromCity:'法兰克福', fromTime:'15:40', fromNext:false,
+   toCode:'PVG', toCity:'上海浦东', toTime:'09:15', toNext:true, dur:'11h35', stops:'直飞', note:'经济舱'}
+];
+
+var CARS = [
+  {code:'Europcar 取车', date:'9/26 07:30', route:'慕尼黑机场 T1 · Airportcenter Ebene 3',
+   note:'Volvo V60 或同级 · 含跨境费 · 含额外驾驶员 · 含异地还车 · 无限里程 · 全险',
+   addr:'Terminalstr. Mitte, Airportcenter Ebene 3, 85356 München',
+   tel:'+49 89 9735020', pmap:'München Flughafen Airportcenter'},
+  {code:'Europcar 还车', date:'10/6 13:00', route:'法兰克福机场 · Airport City Mall',
+   addr:'Airport City Mall, 60549 Frankfurt am Main',
+   tel:'+49 69 697970', pmap:'Frankfurt Airport City Mall'}
+];
+
+var HOTELS = [
+  {code:'萨尔茨堡喜来登', date:'9/26 – 9/28 · 2 晚', route:'2 间经典大床房 · 含早',
+   addr:'Auerspergstraße 4, 5020 Salzburg', tel:'+43-662-889990', pmap:'Sheraton Grand Salzburg'},
+  {code:'因斯布鲁克假日酒店', date:'9/28 – 9/29 · 1 晚', route:'三人房 · 含早',
+   addr:'Bernhard-Höfel-Straße 16, 6020 Innsbruck', tel:'+43-512344333', pmap:'Holiday Inn Innsbruck'},
+  {code:'菲森索内酒店', date:'9/29 – 9/30 · 1 晚', route:'中等四人房 · 含早',
+   addr:'Prinzregentenpl. 1, 87629 Füssen', tel:'+49-83629080', pmap:'Hotel Sonne Füssen'},
+  {code:'慕尼黑威斯汀', date:'9/30 – 10/3 · 3 晚', route:'精致套房 · 含早',
+   addr:'Arabellastraße 6, 81925 München', tel:'+49-89-92640', pmap:'The Westin Grand Munich'},
+  {code:'纽伦堡喜来登', date:'10/3 – 10/4 · 1 晚', route:'2 间高级庭院景双床房 · 含早',
+   addr:'Eilgutstraße 15, 90443 Nürnberg', tel:'+49-911-20030', pmap:'Sheraton Carlton Nürnberg'},
+  {code:'维尔茨堡玛丽蒂姆', date:'10/4 – 10/6 · 2 晚', route:'舒适家庭房 · 含早',
+   addr:'Pleichertorstraße 5, 97070 Würzburg', tel:'+49-931-3053830', pmap:'Maritim Hotel Würzburg'}
+];
+
+var TICKETS = [
+  {code:'新天鹅堡', date:'9/29 09:00', route:'3 人 · Tour 412 · 中文语音导览', note:'已预约', pmap:'Schloss Neuschwanstein'},
+  {code:'维尔茨堡主教宫', date:'10/5', route:'3 人 · 免费入场', note:'已预约 · 9:00–18:00 · 最后入场 17:15', pmap:'Residenz Würzburg'}
 ];
 
 var DAYS = [
@@ -532,25 +579,63 @@ var TIPS = [
 function gmap(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);}
 function gdir(list){return 'https://www.google.com/maps/dir/?api=1&'+list.map(function(p,i){return (i===0?'origin=':'destination=')+encodeURIComponent(p);}).join('&');}
 
-/* 已确认（酒店和租车行名称可点击） */
-var bEl = document.getElementById('bookings'), bHtml = '';
-BOOKINGS.forEach(function(g){
-  bHtml += '<div class="booking-group"><div class="bg-title">'+g.icon+' '+g.label+'</div>';
-  g.items.forEach(function(it){
-    bHtml += '<div class="booking"><div class="b-head">';
-    if(it.pmap) bHtml += '<a class="b-code" href="'+gmap(it.pmap)+'" target="_blank" rel="noopener">'+it.code+' ↗</a>';
-    else bHtml += '<span class="b-code">'+it.code+'</span>';
-    bHtml += '<span class="b-date">'+it.date+'</span></div>';
-    bHtml += '<div class="b-route">'+it.route+'</div>';
-    if(it.note) bHtml += '<div class="b-note">'+it.note+'</div>';
-    if(it.addr) bHtml += '<div class="b-addr">📍 '+it.addr+'</div>';
-    if(it.tel) bHtml += '<a class="b-tel" href="tel:'+it.tel.split(' / ')[0].replace(/\s/g,'')+'">📞 '+it.tel+'</a>';
-    if(it.pmap) bHtml += '<a class="b-map" href="'+gmap(it.pmap)+'" target="_blank" rel="noopener">🗺 打开地图</a>';
-    bHtml += '</div>';
-  });
-  bHtml += '</div>';
+/* 航班滑动卡片 */
+var fEl = document.getElementById('flightSlider'), fHtml = '';
+FLIGHTS.forEach(function(f){
+  fHtml += '<div class="flight-card">';
+  fHtml += '<div class="fc-header"><div class="fc-num">'+f.num+'<span>'+f.airline+'</span></div><div class="fc-date">'+f.date+'</div></div>';
+  fHtml += '<div class="fc-route">';
+  fHtml += '<div class="fc-end"><div class="fc-time">'+f.fromTime+'</div><div class="fc-airport">'+f.fromCode+'</div><div class="fc-city">'+f.fromCity+'</div></div>';
+  fHtml += '<div class="fc-mid"><div class="fc-dur">'+f.dur+'</div><div class="fc-line"><span class="dot"></span><span class="bar"></span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg><span class="bar"></span><span class="dot"></span></div><div class="fc-stops">'+f.stops+'</div></div>';
+  fHtml += '<div class="fc-end"><div class="fc-time">'+f.toTime+(f.toNext?'<sup>+1</sup>':'')+'</div><div class="fc-airport">'+f.toCode+'</div><div class="fc-city">'+f.toCity+'</div></div>';
+  fHtml += '</div></div>';
 });
-bEl.innerHTML = bHtml;
+fEl.innerHTML = fHtml;
+
+/* 租车 */
+var cEl = document.getElementById('carList'), cHtml = '';
+CARS.forEach(function(c){
+  cHtml += '<div class="booking"><div class="b-head">';
+  if(c.pmap) cHtml += '<a class="b-code" href="'+gmap(c.pmap)+'" target="_blank" rel="noopener">'+c.code+' ↗</a>';
+  else cHtml += '<span class="b-code">'+c.code+'</span>';
+  cHtml += '<span class="b-date">'+c.date+'</span></div>';
+  cHtml += '<div class="b-route">'+c.route+'</div>';
+  if(c.note) cHtml += '<div class="b-note">'+c.note+'</div>';
+  if(c.addr) cHtml += '<div class="b-addr">📍 '+c.addr+'</div>';
+  if(c.tel) cHtml += '<a class="b-tel" href="tel:'+c.tel.replace(/\s/g,'')+'">📞 '+c.tel+'</a>';
+  if(c.pmap) cHtml += '<a class="b-map" href="'+gmap(c.pmap)+'" target="_blank" rel="noopener">🗺 打开地图</a>';
+  cHtml += '</div>';
+});
+cEl.innerHTML = cHtml;
+
+/* 酒店 */
+var hEl = document.getElementById('hotelList'), hHtml = '';
+HOTELS.forEach(function(h){
+  hHtml += '<div class="booking"><div class="b-head">';
+  if(h.pmap) hHtml += '<a class="b-code" href="'+gmap(h.pmap)+'" target="_blank" rel="noopener">'+h.code+' ↗</a>';
+  else hHtml += '<span class="b-code">'+h.code+'</span>';
+  hHtml += '<span class="b-date">'+h.date+'</span></div>';
+  hHtml += '<div class="b-route">'+h.route+'</div>';
+  if(h.addr) hHtml += '<div class="b-addr">📍 '+h.addr+'</div>';
+  if(h.tel) hHtml += '<a class="b-tel" href="tel:'+h.tel.replace(/\s/g,'')+'">📞 '+h.tel+'</a>';
+  if(h.pmap) hHtml += '<a class="b-map" href="'+gmap(h.pmap)+'" target="_blank" rel="noopener">🗺 打开地图</a>';
+  hHtml += '</div>';
+});
+hEl.innerHTML = hHtml;
+
+/* 门票 */
+var kEl = document.getElementById('ticketList'), kHtml = '';
+TICKETS.forEach(function(t){
+  kHtml += '<div class="booking"><div class="b-head">';
+  if(t.pmap) kHtml += '<a class="b-code" href="'+gmap(t.pmap)+'" target="_blank" rel="noopener">'+t.code+' ↗</a>';
+  else kHtml += '<span class="b-code">'+t.code+'</span>';
+  kHtml += '<span class="b-date">'+t.date+'</span></div>';
+  kHtml += '<div class="b-route">'+t.route+'</div>';
+  if(t.note) kHtml += '<div class="b-note">'+t.note+'</div>';
+  if(t.pmap) kHtml += '<a class="b-map" href="'+gmap(t.pmap)+'" target="_blank" rel="noopener">🗺 打开地图</a>';
+  kHtml += '</div>';
+});
+kEl.innerHTML = kHtml;
 
 /* 逐日 */
 var dEl = document.getElementById('days'), dHtml = '';
@@ -599,7 +684,7 @@ dEl.addEventListener('click', function(e){
   head.parentElement.classList.toggle('open');
 });
 
-/* 购物点 */
+/* 购物 */
 var sEl = document.getElementById('shops'), sHtml = '';
 SHOPS.forEach(function(city){
   sHtml += '<div class="shop-city" style="--city-color:'+city.color+'"><h3>'+city.city+'</h3>';
