@@ -162,6 +162,7 @@ footer{text-align:center;font-size:11.5px;color:var(--text2);margin:32px 16px 16
   <button class="tab" data-tab="bookings">已确认</button>
   <button class="tab" data-tab="days">逐日行程</button>
   <button class="tab" data-tab="shops">购物点</button>
+  <button class="tab" data-tab="food">美食</button>
   <button class="tab" data-tab="pass">通票景点</button>
   <button class="tab" data-tab="todo">待办</button>
   <button class="tab" data-tab="packing">行李</button>
@@ -279,6 +280,7 @@ footer{text-align:center;font-size:11.5px;color:var(--text2);margin:32px 16px 16
 
   <section class="panel" id="panel-days"><div class="section"><div id="days"></div></div></section>
   <section class="panel" id="panel-shops"><div class="section"><div id="shops"></div></div></section>
+  <section class="panel" id="panel-food"><div class="section"><div id="food"></div></div></section>
 
   <section class="panel" id="panel-pass">
     <div class="section" style="margin-top:16px">
@@ -597,6 +599,72 @@ var SHOPS = [
   ]}
 ];
 
+var FOOD = [
+  {city:'萨尔茨堡', color:'#ff6b6b', places:[
+    {n:'Bärenwirt', t:'奥地利传统菜', b:'百年老店（1663年），招牌炸猪排和 Salzburger Nockerl 甜点，附赠白醋土豆沙拉', a:'Bärenwirt Salzburg'},
+    {n:'Balkan Grill Walter', t:'奥地利快餐', b:'老城 Getreidegasse 巷子里的传奇热狗摊，Bosna 热狗是招牌，适合逛粮食胡同时快速解决', a:'Balkan Grill Walter Salzburg'},
+    {n:'IMLAUER Sky Bar & Restaurant', t:'奥地利/国际菜', b:'酒店顶楼露台，俯瞰整个老城区和霍亨萨尔茨堡要塞，适合边吃边看风景', a:'IMLAUER Sky Bar Salzburg'},
+    {n:'Yiyami', t:'中餐（川湘菜）', b:'味道正宗，不是欧洲改良版中餐，有国内川湘菜馆的感觉', a:'Yiyami Salzburg'},
+    {n:'Yuen 中餐厅', t:'中餐', b:'1967年创立，萨尔茨堡第一家也是历史最悠久的中餐厅，至今第三代经营', a:'Yuen China Restaurant Salzburg'}
+  ]},
+  {city:'哈尔施塔特', color:'#ffa94d', places:[
+    {n:'Gasthof Zauner', t:'奥地利传统菜', b:'百年老店，招牌是湖里现捞的烤鳟鱼，外酥里嫩，甜品推荐苹果派', a:'Gasthof Zauner Hallstatt'},
+    {n:'Seewirt Zauner', t:'奥地利传统菜', b:'同 Zauner 家族，除烤鳟鱼还有综合烤肉盘，人多可以多点几样分着吃', a:'Seewirt Zauner Hallstatt'},
+    {n:'Gasthof Simony', t:'奥地利传统菜', b:'临水的湖景平台，可以边吃烤鳟鱼边看湖景，下午喝咖啡也很惬意', a:'Gasthof Simony Hallstatt'}
+  ]},
+  {city:'因斯布鲁克', color:'#51cf66', places:[
+    {n:'Stiftskeller Innsbruck', t:'奥地利传统菜', b:'藏在13世纪地窖里的餐厅，拱门木梁怀旧氛围，特色鹿肉、鳟鱼、匈牙利牛肉汤', a:'Stiftskeller Innsbruck'},
+    {n:'Goldener Adler', t:'奥地利传统菜', b:'黄金屋顶附近老城区，历史悠久的传统餐厅，适合游览老城时顺路用餐', a:'Goldener Adler Innsbruck'},
+    {n:'Strudel Cafe Kroll', t:'奥地利甜品/咖啡馆', b:'家庭经营，1976年开业，以新鲜出炉的苹果卷闻名，有经典和创意馅料', a:'Strudel Cafe Kroll Innsbruck'},
+    {n:'Cafe Katzung', t:'奥地利/咖啡馆', b:'老城中心，经典德国和奥地利舒适食品，咖啡和糕点受欢迎', a:'Cafe Katzung Innsbruck'}
+  ]},
+  {city:'菲森 / 新天鹅堡', color:'#339af0', places:[
+    {n:'Gasthof Krone', t:'德国传统菜', b:'菲森老城最有名餐厅之一，中世纪氛围，服务生穿传统服饰，推荐烤猪脚配黑啤', a:'Gasthof Krone Füssen'},
+    {n:'Schlossbrauhaus Schwangau', t:'德国传统菜/啤酒花园', b:'新天鹅堡附近最大啤酒花园，自酿扎啤，烤猪肘、烤鳟鱼、洋葱汤，室外可见新天鹅堡', a:'Schlossbrauhaus Schwangau'},
+    {n:'Kainz Restaurant', t:'德国传统菜', b:'新天鹅堡山脚下，室外区域有仰拍天鹅堡的好角度，上菜快', a:'Kainz Restaurant Schwangau'},
+    {n:'Restaurant Louis II', t:'高端全球美食', b:'隐藏在酒店中的精致餐厅，露台欣赏山脉和城堡，被誉为菲森最佳之一', a:'Restaurant Louis II Füssen'},
+    {n:'Il Pescatore', t:'意大利菜', b:'菲森老城意式餐厅，披萨和意面都很正宗，吃腻烤猪肘可以换口味', a:'Il Pescatore Füssen'}
+  ]},
+  {city:'慕尼黑', color:'#9775fa', places:[
+    {n:'Ratskeller München', t:'巴伐利亚传统菜', b:'新市政厅地下室特色餐厅，环境宽敞有氛围，招牌德国猪手，配地道德国啤酒', a:'Ratskeller München'},
+    {n:'Ayinger am Platzl', t:'巴伐利亚传统菜', b:'靠近玛丽恩广场，装饰复古充满历史感，最有名烤猪肉和白香肠', a:'Ayinger am Platzl München'},
+    {n:'Chinesischer Turm', t:'啤酒花园', b:'英国花园内中国塔旁，慕尼黑最经典、规模最大的啤酒花园之一，本地生活感强', a:'Chinesischer Turm München'},
+    {n:'Augustiner-Keller', t:'啤酒花园', b:'历史可追溯到1812年，可容纳7000人，新鲜奥古斯丁啤酒，市中心', a:'Augustiner-Keller München'},
+    {n:'YUMIRA Korean BBQ', t:'韩国烤肉', b:'慕尼黑比较正宗的韩国烤肉，结合韩式烧烤和越南菜，配菜质量高，需提前一周订位', a:'YUMIRA Korean BBQ München'},
+    {n:'湘香轩', t:'中餐（湘菜）', b:'深受当地华人喜爱，主打湘菜，大部分菜肴香辣美味，服务热情', a:'Xiang Xiang Xuan München'}
+  ]},
+  {city:'罗滕堡', color:'#f06595', places:[
+    {n:'Zur Hoell', t:'德国传统菜/酒馆', b:'被称为“恶魔餐厅”，历史可追溯到公元900年，罗滕堡最古老建筑之一，中世纪装潢', a:'Zur Hoell Rothenburg'},
+    {n:'Baumeisterhaus', t:'弗兰肯菜', b:'文艺复兴建筑内中世纪餐厅，推荐牛肉汤、法兰肯马铃薯汤、烤猪膝', a:'Baumeisterhaus Rothenburg'},
+    {n:'Restaurant Michelangelo', t:'意大利菜', b:'古老城墙附近，1902年起营业，传统意大利菜肴，包括罗滕堡雪球', a:'Restaurant Michelangelo Rothenburg'},
+    {n:'Bäckerei-Konditorei', t:'甜品/咖啡馆', b:'市政厅广场附近，主打罗滕堡特色雪球 Schneeballen，建议点 mini 版多尝几种口味', a:'Bäckerei Konditorei Rothenburg'}
+  ]},
+  {city:'纽伦堡', color:'#f06595', places:[
+    {n:'Bratwursthäusle bei St. Sebald', t:'德国传统菜', b:'创于1313年，700多年历史，圣塞巴尔德教堂旁，传统烤香肠，原料出自自家饲养场和农田', a:'Bratwursthäusle Nürnberg'},
+    {n:'Zum Gulden Stern', t:'德国传统菜', b:'纽伦堡现存最古老烤肠店，1419年开始售卖纽伦堡香肠，仍在原址经营', a:'Zum Gulden Stern Nürnberg'},
+    {n:'Gutmann', t:'德国传统菜/啤酒馆', b:'很传统、很接地气的德国家常餐厅，氛围和“德国味”很足', a:'Gutmann Nürnberg'},
+    {n:'Ni Hao 你好中餐馆', t:'中餐（川菜）', b:'以正宗四川菜闻名，四川兔肉非常辣，鱼香肉丝也很不错', a:'Ni Hao Nürnberg'}
+  ]},
+  {city:'班贝格', color:'#20c997', places:[
+    {n:'Schlenkerla', t:'德国传统菜/啤酒馆', b:'班贝格最有名的烟熏啤酒馆，700年历史，拱顶木梁，招牌烟熏啤酒 Rauchbier 用榉木烟熏麦芽酿造', a:'Schlenkerla Bamberg'},
+    {n:'Brauerei Spezial', t:'德国传统菜/啤酒馆', b:'历史悠久的酒馆，以烤猪肉、炸肉排和饺子闻名，搭配招牌烟熏啤酒', a:'Brauerei Spezial Bamberg'},
+    {n:'Spezial-Keller', t:'德国传统菜/啤酒花园', b:'提供轻松氛围和城市天际线美景，以烟熏啤酒和地方菜肴闻名，适合户外用餐', a:'Spezial-Keller Bamberg'},
+    {n:'Casa Italia Bamberg', t:'意大利菜', b:'坐落在老城区历史建筑内的意大利餐厅，楼下是比萨饼店，离老市政厅和大教堂近', a:'Casa Italia Bamberg'}
+  ]},
+  {city:'维尔茨堡', color:'#20c997', places:[
+    {n:'Würzburger Ratskeller', t:'弗兰肯菜', b:'市政厅老楼地窖餐厅，Schiestl-Stube 保留传统风情，弗兰肯美食朴实味美，人均15-20欧', a:'Würzburger Ratskeller'},
+    {n:'Maulaffenbäck', t:'德国传统菜/酒馆', b:'位于老城区中心，历史可追溯到1907年，推荐肝饺汤，葡萄酒也不错', a:'Maulaffenbäck Würzburg'},
+    {n:'Weinstuben Juliusspital', t:'德国传统菜/葡萄酒馆', b:'1576年建立的医院附属酒馆，经典且本地很有名气，提供各种葡萄酒和地道本地美食', a:'Weinstuben Juliusspital Würzburg'},
+    {n:'Bua Thai', t:'泰国菜', b:'以非常实惠的价格提供美味可口的泰国美食，可以坐在露台上用餐，人均约6-8欧', a:'Bua Thai Würzburg'}
+  ]},
+  {city:'法兰克福', color:'#adb5bd', places:[
+    {n:'Apfelweinwirtschaft Atschel', t:'德国传统菜/苹果酒馆', b:'1849年创立的百年酒馆，萨克森豪森区，保留古老风格与手工自酿苹果酒', a:'Apfelweinwirtschaft Atschel Frankfurt'},
+    {n:'Adolf Wagner', t:'德国传统菜/苹果酒馆', b:'正宗的苹果酒和当地菜肴，推荐 Grüne Soße 和炸猪排', a:'Adolf Wagner Frankfurt'},
+    {n:'Zum Schwarzen Stern', t:'德国传统菜', b:'位于市中心，历史建筑环绕，露台用餐体验很棒，推荐烤猪脚、烤猪肘和苹果卷', a:'Zum Schwarzen Stern Frankfurt'},
+    {n:'Aroydee', t:'泰国菜', b:'位于中央老城区，法兰克福最好的泰国餐厅之一，推荐海南鸡饭、芒果糯米饭、猪脚饭、大虾粉丝煲', a:'Aroydee Frankfurt'}
+  ]}
+];
+
 var PASS = [
   {city:'慕尼黑', color:'#1d6fe8', places:[
     {n:'慕尼黑皇宫 Residenz München', b:'包含珍宝馆、屈维利埃剧院', a:'Residenzstraße 1, 80333 München'},
@@ -676,7 +744,7 @@ var PACKING = [
 ];
 
 var TIPS = [
-  {t:'穿搭建议', d:'9月底10月初德奥地区早晚温差大，山区更冷。建议“洋葱式叠穿”：内搭长袖T恤/薄毛衣，外搭防风冲锋衣或薄羽绒服。颜色以黑、白、灰、驼色等中性色为主，百搭上镜。可带一条亮色围巾点缀，拍照更好看。鞋子选舒适防水的步行鞋，应对石板路和可能的小雨。'},
+  {t:'穿搭建议', d:'9月底10月初德奥地区早晚温差大，山区更冷。建议"洋葱式叠穿"：内搭长袖T恤/薄毛衣，外搭防风冲锋衣或薄羽绒服。颜色以黑、白、灰、驼色等中性色为主，百搭上镜。可带一条亮色围巾点缀，拍照更好看。鞋子选舒适防水的步行鞋，应对石板路和可能的小雨。'},
   {t:'时区', d:'全程 Europe/Berlin，夏令时 UTC+2；上海 UTC+8，差 6 小时。页面内所有时间都已带时区，跨时区打开不会算错。'},
   {t:'开车', d:'德国高速部分路段不限速，建议保持 130km/h 以内。奥地利高速必须贴 Vignette，没贴罚款 €120 起。德国城市环保区必须有绿标。'},
   {t:'停车', d:'德国城市停车费较贵，建议停在酒店车库。路边停车注意看标志，有些区域只允许居民停。'},
@@ -686,7 +754,8 @@ var TIPS = [
   {t:'紧急电话', d:'欧洲通用紧急电话 112。中国驻德国使馆 +49-30-27588500，中国驻奥地利使馆 +43-1-7143149。'},
   {t:'啤酒节', d:'2026 年慕尼黑啤酒节 9/19–10/4。帐篷内需要消费，建议带现金。周末人极多，注意随身物品。'},
   {t:'购物退税', d:'非欧盟居民购物满 €50 可退税。保留小票和退税单，在法兰克福机场办理。'},
-  {t:'通票使用', d:'巴伐利亚宫殿14日联票从第一次使用当天起算，连续14天有效。新天鹅堡需提前预约时段并支付预约费。高天鹅堡不包含在内。'}
+  {t:'通票使用', d:'巴伐利亚宫殿14日联票从第一次使用当天起算，连续14天有效。新天鹅堡需提前预约时段并支付预约费。高天鹅堡不包含在内。'},
+  {t:'美食推荐', d:'各城市美食已按城市分组，标注菜系和特色。热门餐厅（罗滕堡 Zur Hoell、慕尼黑 YUMIRA）建议提前订位。班贝格烟熏啤酒味道独特，建议先点一杯尝尝。'}
 ];
 
 function gmap(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);}
@@ -808,7 +877,7 @@ try{
   DAYS.forEach(function(day, idx){
     dHtml += '<div class="day" data-idx="'+idx+'" style="--day-color:'+day.color+'">';
     dHtml += '<div class="day-head"><div class="day-left"><div class="day-num">DAY '+day.n+'</div><div class="day-date">'+day.date+' '+day.wd+'</div></div>';
-    dHtml += '<div class="day-right"><div class="day-title">'+day.title+'</div><div class="day-meta">住 '+day.stay+' · '+day.drive+' · '+day.weather+'</div></div>';
+    dHtml += '<div class="day-right"><div class="day-title">'+day.title+'</div><div class="day-meta">'+day.weather+' · '+day.drive+'</div></div>';
     dHtml += '<svg class="day-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>';
     dHtml += '<div class="day-body">';
     if(day.route && day.route.length > 1){
@@ -865,6 +934,28 @@ try{
     head.parentElement.classList.toggle('open');
   });
 }catch(e){console.log('shops err',e);}
+
+try{
+  var foodEl = document.getElementById('food'), foodHtml = '';
+  FOOD.forEach(function(city, ci){
+    foodHtml += '<div class="shop-city'+(ci===0?' open':'')+'" style="--city-color:'+city.color+'">';
+    foodHtml += '<div class="shop-city-head"><span class="sc-name">'+city.city+'</span><span class="sc-cnt">'+city.places.length+' 家</span>';
+    foodHtml += '<svg class="sc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>';
+    foodHtml += '<div class="shop-city-body">';
+    city.places.forEach(function(p){
+      foodHtml += '<div class="shop-item"><div class="shop-name"><a href="'+gmap(p.a)+'" target="_blank" rel="noopener">'+p.n+'</a><span class="shop-tag">'+p.t+'</span></div>';
+      foodHtml += '<div class="shop-brands">'+p.b+'</div>';
+      foodHtml += '<div class="shop-addr"><a href="'+gmap(p.a)+'" target="_blank" rel="noopener">📍 '+p.a+'</a></div></div>';
+    });
+    foodHtml += '</div></div>';
+  });
+  foodEl.innerHTML = foodHtml;
+  foodEl.addEventListener('click', function(e){
+    var head = e.target.closest('.shop-city-head');
+    if(!head) return;
+    head.parentElement.classList.toggle('open');
+  });
+}catch(e){console.log('food err',e);}
 
 try{
   var TODO_KEY = 'travel_todo_v1';
